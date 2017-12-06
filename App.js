@@ -56,10 +56,6 @@ class LandingScreen extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <View style={styles.container}>
-        <Text>Test</Text>
-=======
       <View style={styles.background}>
         <Image style={styles.backgroundColor} source={require('./landingpage.jpg')}/>
         <Text style={{fontSize: 50, fontWeight: 'bold', color: 'white'}} >Trouvaille</Text>
@@ -74,7 +70,6 @@ class LandingScreen extends React.Component {
             <Text style={styles.buttonLabel}>Log in</Text>
           </TouchableOpacity>
         </View>
->>>>>>> master
       </View>
 
     );
