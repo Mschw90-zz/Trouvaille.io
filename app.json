@@ -10,7 +10,7 @@
     "primaryColor": "#cccccc",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/carTrip.gif",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
