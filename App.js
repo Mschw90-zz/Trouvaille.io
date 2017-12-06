@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import {
   Container,
@@ -21,6 +21,8 @@ import {
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Sidebar from './sidebar.js';
 
+import { Constants, Facebook } from 'expo';
+
 class LandingScreen extends React.Component {
 
   loginPage() {
@@ -35,20 +37,60 @@ class LandingScreen extends React.Component {
     this.props.navigation.navigate('Profile')
   }
 
+  _handleFacebookLogin = async () => {
+    try {
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+        '1201211719949057', // Replace with your own app id in standalone app
+        { permissions: ['public_profile'] }
+      );
+
+      switch (type) {
+        case 'success': {
+          // Get the user's name using Facebook's Graph API
+          const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+          const profile = await response.json();
+          Alert.alert(
+            'Logged in!',
+            `Hi ${profile.name}!`,
+          );
+          break;
+        }
+        case 'cancel': {
+          Alert.alert(
+            'Cancelled!',
+            'Login was cancelled!',
+          );
+          break;
+        }
+        default: {
+          Alert.alert(
+            'Oops!',
+            'Login failed!',
+          );
+        }
+      }
+    } catch (e) {
+      Alert.alert(
+        'Oops!',
+        'Login failed!',
+      );
+    }
+  };
+
   render() {
     return (
       <View style={styles.background}>
         <Image style={styles.backgroundColor} source={require('./landingpage.jpg')}/>
         <Text style={{fontSize: 50, fontWeight: 'bold', color: 'white'}} >Trouvaille</Text>
         <View style={{width: 375}}>
-          <TouchableOpacity style={[styles.button, styles.buttonBlue]}>
-          <Text style={styles.buttonLabel}>Continue with FaceBook</Text>
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this._handleFacebookLogin()} }>
+            <Text style={styles.buttonLabel}>Continue with FaceBook</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.registerPage()}}>
-          <Text style={styles.buttonLabel}>Sign up with Email</Text>
+          <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.registerPage()} }>
+            <Text style={styles.buttonLabel}>Sign up with Email</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonGreen]} onPress={ () => {this.loginPage()}}>
-          <Text style={styles.buttonLabel}>Log in</Text>
+          <TouchableOpacity style={[styles.button, styles.buttonGreen]} onPress={ () => {this.loginPage()} }>
+            <Text style={styles.buttonLabel}>Log in</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.button, styles.buttonGold]} onPress={ () => {this.profilePage()}}>
           <Text style={styles.buttonLabel}>Go to Test Profile</Text>
@@ -163,8 +205,49 @@ class LoginScreen extends React.Component {
         super(props);
         this.state = {error: '', username: '', password: ''}
     }
+
     static navigationOptions = {
       title: 'Login to Catch a Ride!'
+    };
+
+    _handleFacebookLogin = async () => {
+      try {
+        const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+          '1201211719949057', // Replace with your own app id in standalone app
+          { permissions: ['public_profile'] }
+        );
+
+        switch (type) {
+          case 'success': {
+            // Get the user's name using Facebook's Graph API
+            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+            const profile = await response.json();
+            Alert.alert(
+              'Logged in!',
+              `Hi ${profile.name}!`,
+            );
+            break;
+          }
+          case 'cancel': {
+            Alert.alert(
+              'Cancelled!',
+              'Login was cancelled!',
+            );
+            break;
+          }
+          default: {
+            Alert.alert(
+              'Oops!',
+              'Login failed!',
+            );
+          }
+        }
+      } catch (e) {
+        Alert.alert(
+          'Oops!',
+          'Login failed!',
+        );
+      }
     };
 
   render() {
@@ -183,6 +266,9 @@ class LoginScreen extends React.Component {
           ></TextInput>
           <TouchableOpacity style={[styles.button, styles.buttonGreen]}>
               <Text style={styles.buttonLabel}>Tap to Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this._handleFacebookLogin()} }>
+            <Text style={styles.buttonLabel}>Login with FaceBook</Text>
           </TouchableOpacity>
       </View>
     )
@@ -247,6 +333,7 @@ export default StackNavigator({
   Register: {
     screen: RegisterScreen,
   },
+
   Profile: {
     screen: ProfileScreen,
     navigationOptions: {
@@ -280,19 +367,20 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   background: {
-    paddingTop: 50,
-    paddingBottom: 40,
+    flex: 1,
     justifyContent: "space-between",
     alignItems: 'center',
-    width: 375,
-    height: 667,
-    backgroundColor: "transparent"
+    alignSelf: 'stretch',
+    paddingTop: 50,
+    paddingBottom: 40,
+    backgroundColor: "transparent",
   },
   backgroundColor: {
-    top: 0,
+    flex: 1,
+    resizeMode: 'cover',
     position: 'absolute',
-    height: 667,
-    width: 375
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width
   },
   button: {
     alignSelf: 'stretch',
