@@ -20,7 +20,6 @@ import {
   FooterTab} from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Sidebar from './sidebar.js';
-
 import { Constants, Facebook } from 'expo';
 import { DOMAIN } from './env.js';
 class LandingScreen extends React.Component {
