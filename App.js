@@ -17,7 +17,7 @@ class LandingScreen extends React.Component {
   _handleFacebookLogin = async () => {
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-        '1201211719949057', // Replace with your own app id in standalone app
+        '116740725744139', // Replace with your own app id in standalone app
         { permissions: ['public_profile'] }
       );
 
@@ -58,8 +58,10 @@ class LandingScreen extends React.Component {
     return (
       <View style={styles.background}>
         <Image style={styles.backgroundColor} source={require('./landingpage.jpg')}/>
-        <Text style={{fontSize: 50, fontWeight: 'bold', color: 'white'}} >Trouvaille</Text>
-        <View style={{width: 375}}>
+        <View style={{width: Dimensions.get('window').width}}>
+          <Text style={{fontSize: 50, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>Trouvaille</Text>
+        </View>
+        <View style={{width: Dimensions.get('window').width}}>
           <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this._handleFacebookLogin()} }>
             <Text style={styles.buttonLabel}>Continue with FaceBook</Text>
           </TouchableOpacity>
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 5,
     marginRight: 5,
-    borderRadius: 5
+    borderRadius: 5,
   },
   buttonRed: {
     backgroundColor: '#FF585B',
