@@ -1,9 +1,9 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, Alert, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
 import { Constants, Facebook } from 'expo';
-
+import { DOMAIN } from './env.js';
 class LandingScreen extends React.Component {
 
   loginPage() {
@@ -144,7 +144,7 @@ class LoginScreen extends React.Component {
     }
 
     login(username, password) {
-      fetch('https://hohoho-backend.herokuapp.com/login', {
+      fetch(`${DOMAIN}/login`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -173,7 +173,8 @@ class LoginScreen extends React.Component {
           console.log('caught error in catch of login', err);
           alert(err)
         /* do something if there was an error with fetching */
-      });
+      })
+    }
 
       setUsername(text){
         this.setState(Object.assign({}, this.state, {username: text}));
@@ -182,8 +183,6 @@ class LoginScreen extends React.Component {
       setPassword(text){
         this.setState(Object.assign({}, this.state, {password: text}))
       }
-
-  }
 
 
   render() {
@@ -226,16 +225,16 @@ class LoginScreen extends React.Component {
 class RegisterScreen extends React.Component {
     constructor(props){
         super(props);
-        this.state = {error: '', username: '', password: '', passwordRepeat: '', email: '', }
+        this.state = {error: '', username: '', password: '', passwordRepeat: '', email: '' }
     }
     static navigationOptions = {
       title: 'Register to Catch a Ride!'
     };
 
     setEmail(text){
-      let update = Object.assign({}, this.state, {username: text})
+      let update = Object.assign({}, this.state, {email: text})
       let newText = text.split('')
-      if(text.length > 0 && newText.includes('@') && newText.includes('.'){
+      if(text.length > 0){
           this.setState(update)
       } else {
           alert('Not a Vaild Email')
@@ -262,16 +261,14 @@ class RegisterScreen extends React.Component {
 
     setPasswordRepeat(text){
       let update = Object.assign({}, this.state, {passwordRepeat: text})
-      if(text === password){
+      if(text === this.state.password){
           this.setState(update)
-      } else {
-          alert("Passwords don't match")
       }
     }
 
-    submit(password, username, passwordRepeat, email){
+    submit(username, password, passwordRepeat, email) {
 
-      fetch('https://hohoho-backend.herokuapp.com/register', {
+      fetch(`${DOMAIN}/register`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -296,6 +293,7 @@ class RegisterScreen extends React.Component {
       })
       .catch((err) => {
           console.log('caught error in catch of submt');
+          console.log(`${DOMAIN}/register`);
           alert(err)
         /* do something if there was an error with fetching */
       });
@@ -333,7 +331,7 @@ class RegisterScreen extends React.Component {
               onChangeText={(text) => this.setPasswordRepeat(text)}
           ></TextInput>
           <View style={{flex: 2, paddingTop:15}}>
-            <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.submit(this.state.password, this.state.passwordRepeat, this.state.username, this.state.email)} }>
+            <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.submit(this.state.username, this.state.password, this.state.passwordRepeat, this.state.email)} }>
             <Text style={styles.buttonLabel}>Tap to Register</Text>
             </TouchableOpacity>
           </View>
