@@ -57,7 +57,7 @@ class LandingScreen extends React.Component {
   render() {
     return (
       <View style={styles.background}>
-        <Image style={styles.backgroundColor} source={require('./landingpage.jpg')}/>
+        <Image style={styles.backgroundColor} source={require('./assets/landingpage.jpg')}/>
         <View style={{width: Dimensions.get('window').width}}>
           <Text style={{fontSize: 50, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>Trouvaille</Text>
         </View>
@@ -85,9 +85,8 @@ class LoginScreen extends React.Component {
         super(props);
         this.state = {error: '', username: '', password: ''}
     }
-
     static navigationOptions = {
-      title: 'Login to Catch a Ride!'
+      title: 'Back to Home'
     };
 
     _handleFacebookLogin = async () => {
@@ -130,26 +129,93 @@ class LoginScreen extends React.Component {
       }
     };
 
+    componentDidMount() {
+      AsyncStorage.getItem('user')
+      .then(result => {
+          var parsedResult = JSON.parse(result);
+          var username = parsedResult.username;
+          var password = parsedResult.password;
+          if (username && password) {
+              return this.login(username, password)
+                // .then(resp => resp.json())
+                // .then( resp => console.log(resp))
+        }
+    }).catch(err => {console.log(err)})
+    }
+
+    login(username, password) {
+      fetch('https://hohoho-backend.herokuapp.com/login', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        })
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+         if(responseJson.success){
+             console.log('responsejson', responseJson);
+             AsyncStorage.setItem('user', JSON.stringify({
+                 username: username,
+                 password: password
+             }));
+             return this.props.navigation.navigate('HoHoHo');
+         }else{
+             alert(responseJson.error);
+             console.log('error in fetchlogin', responseJson.error);
+             this.setState({error: responseJson.error});
+         }
+      })
+      .catch((err) => {
+          console.log('caught error in catch of login', err);
+          alert(err)
+        /* do something if there was an error with fetching */
+      });
+
+      setUsername(text){
+        this.setState(Object.assign({}, this.state, {username: text}));
+      }
+
+      setPassword(text){
+        this.setState(Object.assign({}, this.state, {password: text}))
+      }
+
+  }
+
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{flex: 2, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}} >
+      <Image style={styles.backgroundColor} source={require('./assets/loginScreen.jpg')}/>
           <Text style={{alignSelf: 'flex-start'}}>{this.state.error}</Text>
-          <TextInput
-              style={styles.inputField}
-              placeholder="Username"
-          ></TextInput>
+          <View style={{flex: 2, width: Dimensions.get('window').width, backgroundColor: 'transparent', justifyContent: 'center'}}>
+            <Text style={{fontSize: 50, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>Login to Catch a Ride!</Text>
+          </View>
+          <View style={{flex: 2, width: Dimensions.get('window').width, justifyContent: 'center'}}>
+            <TextInput
+                style={styles.inputField}
+                placeholder="Username"
+                onChangeText={(text) => this.setUsername(text)}
+            ></TextInput>
 
-          <TextInput
-              style={styles.inputField}
-              placeholder="Password"
-              secureTextEntry={true}
-          ></TextInput>
-          <TouchableOpacity style={[styles.button, styles.buttonGreen]}>
-              <Text style={styles.buttonLabel}>Tap to Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this._handleFacebookLogin()} }>
-            <Text style={styles.buttonLabel}>Login with FaceBook</Text>
-          </TouchableOpacity>
+            <TextInput
+                style={styles.inputField}
+                placeholder="Password"
+                secureTextEntry={true}
+                onChangeText={(text) => this.setPassword(text)}
+            ></TextInput>
+            <View style={{flex: 2, paddingTop:15}}>
+              <TouchableOpacity onPress={ () => {this.login(this.state.username, this.state.password)} } style={[styles.button, styles.buttonGreen]}>
+                  <Text style={styles.buttonLabel}>Tap to Login</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this._handleFacebookLogin()} }>
+                <Text style={styles.buttonLabel}>Login with FaceBook</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
       </View>
     )
   }
@@ -160,38 +226,118 @@ class LoginScreen extends React.Component {
 class RegisterScreen extends React.Component {
     constructor(props){
         super(props);
-        this.state = {error: '', username: '', password: ''}
+        this.state = {error: '', username: '', password: '', passwordRepeat: '', email: '', }
     }
     static navigationOptions = {
       title: 'Register to Catch a Ride!'
     };
 
+    setEmail(text){
+      let update = Object.assign({}, this.state, {username: text})
+      let newText = text.split('')
+      if(text.length > 0 && newText.includes('@') && newText.includes('.'){
+          this.setState(update)
+      } else {
+          alert('Not a Vaild Email')
+      }
+    }
+
+    setUsername(text){
+      let update = Object.assign({}, this.state, {username: text})
+      if(text.length > 0 ){
+          this.setState(update)
+      } else {
+          alert('Username must be entered')
+      }
+    }
+
+    setPassword(text){
+      let update = Object.assign({}, this.state, {password: text})
+      if(text.length > 0 ){
+          this.setState(update)
+      } else {
+          alert('Password must be entered')
+      }
+    }
+
+    setPasswordRepeat(text){
+      let update = Object.assign({}, this.state, {passwordRepeat: text})
+      if(text === password){
+          this.setState(update)
+      } else {
+          alert("Passwords don't match")
+      }
+    }
+
+    submit(password, username, passwordRepeat, email){
+
+      fetch('https://hohoho-backend.herokuapp.com/register', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          passwordRepeat: passwordRepeat,
+          email: email
+        })
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        /* do something with responseJson and go back to the Login view but
+         * make sure to check for responseJson.success! */
+         if(responseJson.success){
+             return this.props.navigation.goBack();
+         }else{
+             alert(responseJson.error)
+             console.log('THERE WAS AN ERROR', responseJson.error);
+         }
+      })
+      .catch((err) => {
+          console.log('caught error in catch of submt');
+          alert(err)
+        /* do something if there was an error with fetching */
+      });
+    }
+
   render() {
     return (
-      <View style={styles.container}>
-          <Text style={{alignSelf: 'flex-start'}}>{this.state.error}</Text>
+      <View style={{flex: 2, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+        <Image style={styles.backgroundColor} source={require('./assets/registerScreen.jpg')}/>
+        <Text style={{alignSelf: 'flex-start'}}>{this.state.error}</Text>
+        <View style={{flex: 2, width: Dimensions.get('window').width, backgroundColor: 'transparent', justifyContent: 'center'}}>
+          <Text style={{fontSize: 50, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>Come Catch a Ride!</Text>
+        </View>
+        <View style={{flex: 2, width: Dimensions.get('window').width, justifyContent: 'center'}}>
           <TextInput
               style={styles.inputField}
               placeholder="Email Address"
+              onChangeText={(text) => this.setEmail(text)}
           ></TextInput>
           <TextInput
               style={styles.inputField}
               placeholder="Username"
+              onChangeText={(text) => this.setUsername(text)}
           ></TextInput>
           <TextInput
               style={styles.inputField}
               placeholder="Password"
               secureTextEntry={true}
+              onChangeText={(text) => this.setPassword(text)}
           ></TextInput>
           <TextInput
               style={styles.inputField}
               placeholder="Confirm Password"
               secureTextEntry={true}
+              onChangeText={(text) => this.setPasswordRepeat(text)}
           ></TextInput>
-
-          <TouchableOpacity style={[styles.button, styles.buttonGreen]}>
-              <Text style={styles.buttonLabel}>Tap to Login</Text>
-          </TouchableOpacity>
+          <View style={{flex: 2, paddingTop:15}}>
+            <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.submit(this.state.password, this.state.passwordRepeat, this.state.username, this.state.email)} }>
+            <Text style={styles.buttonLabel}>Tap to Register</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     )
   }
@@ -222,7 +368,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   inputField: {
     alignSelf: 'stretch',
@@ -234,8 +379,9 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     borderRadius: 5,
-    borderColor: 'gray',
-    borderWidth: 1
+    // borderColor: 'gray',
+    borderWidth: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)'
   },
   background: {
     flex: 1,
