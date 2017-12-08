@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, TouchableWithoutFeedback, Keyboard  } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Constants, Facebook } from 'expo';
 import { DOMAIN } from './env.js';
@@ -130,6 +130,7 @@ class LoginScreen extends React.Component {
   render() {
     console.log(styles);
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}>
         <Image style={styles.backgroundColor} source={require('./assets/landingpage.jpg')}/>
         <Text style={{alignSelf: 'flex-start'}}>{this.state.error}</Text>
@@ -166,6 +167,7 @@ class LoginScreen extends React.Component {
             </View>
           </View>
       </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
