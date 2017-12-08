@@ -86,7 +86,14 @@ export default class ProfileScreen extends React.Component {
   };
 
 
+  _takePhoto = async () => {
+    let pickerResult = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
 
+    this._handleImagePicked(pickerResult);
+  };
 
 
   render() {
@@ -95,6 +102,10 @@ export default class ProfileScreen extends React.Component {
         <Button
           title="Pick an image from camera roll"
           onPress={this._pickImage}
+        />
+        <Button
+          title="Take picture"
+          onPress={this._takePhoto}
         />
         <Button
           title="delete picture"
