@@ -6,6 +6,7 @@ import { DOMAIN } from './env.js';
 import NewTripScreen from './components/NewTripScreen.js'
 import RegisterScreen from './components/RegisterScreen.js'
 import UserFeedScreen from './components/UserFeedScreen.js'
+import ProfileScreen from './components/ProfileScreen.js'
 import NewDriveScreen from './components/NewDriveScreen.js'
 import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
@@ -176,12 +177,6 @@ class LoginScreen extends React.Component {
 
 //Navigator
 export default StackNavigator({
-  // LandingPage: {
-  //   screen: LandingScreen,
-  //   navigationOptions: {
-  //     header: null,
-  //   },
-  // },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -200,6 +195,9 @@ export default StackNavigator({
   },
   NewTrip: {
     screen: NewTripScreen,
+  },
+  Profile: {
+    screen: ProfileScreen,
   },
   NewDrive: {
     screen: NewDriveScreen,
