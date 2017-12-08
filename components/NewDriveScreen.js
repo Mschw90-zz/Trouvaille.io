@@ -47,8 +47,7 @@ export default class NewDriveScreen extends React.Component {
               <Input placeholder="$ for front seat" />
             </Item>
             <Item last>
-              <Input placeholder="Discussion - Use this to chat and figure out
-                what you need to have a fun trip!" />
+              <Input placeholder="Discussion - Use this to chat and figure out what you need to have a fun trip!" />
             </Item>
           </Form>
         </Content>
