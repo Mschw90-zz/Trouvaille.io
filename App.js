@@ -2,26 +2,13 @@ import React from 'react';
 import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import {
-  Container,
-  Drawer,
-  Header,
-  Title,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Content,
-  Form,
-  Item,
-  Input,
-  Label,
-  Footer,
-  FooterTab} from 'native-base';
+  Container, Drawer, Header, Title, Button, Left, Right, Body, Icon, Content, Form,
+  Item, Input, Label, Footer, FooterTab } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Sidebar from './sidebar.js';
 import { Constants, Facebook } from 'expo';
 import { DOMAIN } from './env.js';
+
 class LandingScreen extends React.Component {
 
   loginPage() {
@@ -33,7 +20,7 @@ class LandingScreen extends React.Component {
   }
 
   profilePage() {
-    this.props.navigation.navigate('Profile')
+    this.props.navigation.navigate('UserFeed')
   }
 
   _handleFacebookLogin = async () => {
@@ -103,10 +90,10 @@ class LandingScreen extends React.Component {
   }
 }
 
-class ProfileScreen extends React.Component {
+class UserFeedScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {sideBarOpen: false}
+    this.state = {}
   }
 
   newTripPage() {
@@ -123,12 +110,13 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <Drawer
-        style={{width: 200, backgroundColor: 'grey'}}
+        style={{marginTop: 100, width: 200, backgroundColor: 'grey'}}
         ref={(ref) => { this.drawer = ref; }}
         content={<Sidebar />}
         onClose={() => this.closeDrawer()} >
 
         <Container>
+
           <Header>
             <Left>
               <Button transparent>
@@ -140,10 +128,11 @@ class ProfileScreen extends React.Component {
             </Body>
             <Right>
               <Button transparent>
-                <Icon name='ios-car' onPress={() => {this.newTripPage()}} style={{color: 'red'}}/>
+                <Icon name='md-car' onPress={() => {this.newTripPage()}} style={{color: 'red'}}/>
               </Button>
             </Right>
           </Header>
+
           <Content>
             <Row style={{height: 75, backgroundColor: 'violet'}}>
               <Text style={{
@@ -170,6 +159,7 @@ class ProfileScreen extends React.Component {
               }}>Mock Trip via Connection</Text>
             </Row>
           </Content>
+
           <Footer>
             <FooterTab>
               <Button full>
@@ -177,6 +167,7 @@ class ProfileScreen extends React.Component {
               </Button>
             </FooterTab>
           </Footer>
+
         </Container>
       </Drawer>
 
@@ -190,15 +181,164 @@ class NewTripScreen extends React.Component {
     this.state = {}
   }
 
+  newDrivePage() {
+    this.props.navigation.navigate('NewDrive');
+  }
+
+  newPassengerPage() {
+    this.props.navigation.navigate('NewPassenger');
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>You made it to the new trip page!</Text>
+      <Container>
+
+
+        <Content>
+          <Text style={{textAlign:'center', fontWeight:'bold', fontSize: 35}}>
+            Would you like to be a driver or passenger?
+          </Text>
+          <View style={{flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row', marginTop: 115, marginLeft: 33}}>
+            <Button transparent style={{backgroundColor: '#379df1', width: 150, height: 150, paddingTop: 55, paddingLeft: 20}}>
+              <Icon name='ios-car' onPress={() => {this.newDrivePage()}} style={{fontSize: 90, marginBottom: 50, color: '#f7d432'}} />
+            </Button>
+            <Button transparent style={{marginLeft: 10, backgroundColor: '#379df1', width: 150, height: 150, paddingTop: 15, paddingLeft: 20}}>
+              <Icon name='ios-briefcase' onPress={() => {this.newPassengerPage()}} style={{color: '#f7d432', fontSize: 90}}/>
+            </Button>
+          </View>
+        </Content>
+        <Footer>
+          <FooterTab>
+            <Button full>
+              <Text>Footer</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
+    )
+  }
+}
+
+class NewDriveScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+
+  DriverDestinationMap() {
+    this.props.navigation.navigate('DriverMap');
+  }
+
+  render() {
+    return (
+      <Container>
+        <Header>
+          <Button onPress={() => {this.DriverDestinationMap()}} style={{paddingTop: 88, marginBottom: 33, width: Dimensions.get('window').width}}><Text>Da Map</Text></Button>
+        </Header>
+        <Content>
+          <Form>
+            <Item>
+              <Input placeholder="Date of Trip" />
+            </Item>
+            <Item last>
+              <Input placeholder="Destination" />
+            </Item>
+            <Item last>
+              <Input placeholder="Why are you travelling?" />
+            </Item>
+            <Item last>
+              <Input placeholder="# of Seats" />
+            </Item>
+            <Item last>
+              <Input placeholder="What are you driving? Include your make
+                model and year." />
+            </Item>
+            <Item last>
+              <Input placeholder="Cost of trip" />
+            </Item>
+            <Item last>
+              <Input placeholder="$ per contributor" />
+            </Item>
+            <Item last>
+              <Input placeholder="$ for front seat" />
+            </Item>
+            <Item last>
+              <Input placeholder="Discussion - Use this to chat and figure out
+                what you need to have a fun trip!" />
+            </Item>
+          </Form>
+        </Content>
+      </Container>
+    )
+  }
+}
+
+class DriverMapScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+
+  render(){
+    return (
+      <View>
+        <Text style={{fontSize: 75, fontWeight: 'bold', alignItems: 'center'}}>Driver Map Here</Text>
       </View>
     )
   }
 }
 
+class NewPassengerScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+
+  PassengerDestinationMap() {
+    this.props.navigation.navigate('PassengerMap');
+  }
+
+  render() {
+    return (
+      <Container>
+        <Header>
+          <Button onPress={() => {this.PassengerDestinationMap()}} style={{paddingTop: 88, marginBottom: 33, width: Dimensions.get('window').width}}><Text>Da Map</Text></Button>
+        </Header>
+        <Content>
+          <Form>
+            <Item>
+              <Input placeholder="Departure date " />
+            </Item>
+            <Item last>
+              <Input placeholder="Destination?" />
+            </Item>
+            <Item last>
+              <Input placeholder="Why are you travelling?" />
+            </Item>
+            <Item last>
+              <Input placeholder="$ contribution: " />
+            </Item>
+          </Form>
+        </Content>
+      </Container>
+    )
+  }
+}
+
+class PassengerMapScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+
+  render(){
+    return (
+      <View>
+        <Text style={{fontSize: 75, fontWeight: 'bold', alignItems: 'center'}}>Passenger map here</Text>
+      </View>
+    )
+  }
+}
 
 //Login Page
 class LoginScreen extends React.Component {
@@ -479,14 +619,26 @@ export default StackNavigator({
     screen: RegisterScreen,
   },
 
-  Profile: {
-    screen: ProfileScreen,
+  UserFeed: {
+    screen: UserFeedScreen,
     navigationOptions: {
       header: null,
     },
   },
   NewTrip: {
     screen: NewTripScreen,
+  },
+  NewDrive: {
+    screen: NewDriveScreen,
+  },
+  NewPassenger: {
+    screen: NewPassengerScreen,
+  },
+  DriverMap: {
+    screen: DriverMapScreen,
+  },
+  PassengerMap: {
+    screen: PassengerMapScreen,
   },
 }, {initialRouteName: 'LandingPage'});
 
