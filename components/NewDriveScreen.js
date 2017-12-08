@@ -35,8 +35,7 @@ export default class NewDriveScreen extends React.Component {
               <Input placeholder="# of Seats" />
             </Item>
             <Item last>
-              <Input placeholder="What are you driving? Include your make
-                model and year." />
+              <Input placeholder="What are you driving? Include your make model and year." />
             </Item>
             <Item last>
               <Input placeholder="Cost of trip" />
