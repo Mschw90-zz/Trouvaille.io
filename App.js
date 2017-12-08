@@ -6,6 +6,10 @@ import { DOMAIN } from './env.js';
 import NewTripScreen from './components/NewTripScreen.js'
 import RegisterScreen from './components/RegisterScreen.js'
 import UserFeedScreen from './components/UserFeedScreen.js'
+import NewDriveScreen from './components/NewDriveScreen.js'
+import NewPassengerScreen from './components/NewPassengerScreen.js'
+import DriverMapScreen from './components/DriverMapScreen.js'
+import PassengerMapScreen from './components/PassengerMapScreen.js'
 import styles from './styles.js'
 
 //Login Page
@@ -196,5 +200,17 @@ export default StackNavigator({
   },
   NewTrip: {
     screen: NewTripScreen,
+  },
+  NewDrive: {
+    screen: NewDriveScreen,
+  },
+  NewPassenger: {
+    screen: NewPassengerScreen,
+  },
+  DriverMap: {
+    screen: DriverMapScreen,
+  },
+  PassengerMap: {
+    screen: PassengerMapScreen,
   },
 }, {initialRouteName: 'Login'});
