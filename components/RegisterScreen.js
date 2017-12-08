@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Constants, Facebook } from 'expo';
 import { DOMAIN } from '../env.js';
@@ -88,43 +88,45 @@ export default class RegisterScreen extends React.Component {
 
   render() {
     return (
-    <View style={styles.background}>
-        <Image style={styles.backgroundColor} source={require('../assets/registerScreen.jpg')}/>
-        <View style={{flex: .5, width: Dimensions.get('window').width, backgroundColor: 'transparent'}}>
-          <Text style={{fontSize: 50, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>Come Catch a Ride!</Text>
-        </View>
-        <View style={{flex: 1, width: Dimensions.get('window').width}}>
-          <View>
-            <TextInput
-                style={styles.inputField2}
-                placeholder="Email Address"
-                onChangeText={(text) => this.setEmail(text)}
-            ></TextInput>
-            <TextInput
-                style={styles.inputField2}
-                placeholder="Username"
-                onChangeText={(text) => this.setUsername(text)}
-            ></TextInput>
-            <TextInput
-                style={styles.inputField2}
-                placeholder="Password"
-                secureTextEntry={true}
-                onChangeText={(text) => this.setPassword(text)}
-            ></TextInput>
-            <TextInput
-                style={styles.inputField2}
-                placeholder="Confirm Password"
-                secureTextEntry={true}
-                onChangeText={(text) => this.setPasswordRepeat(text)}
-            ></TextInput>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.background}>
+          <Image style={styles.backgroundColor} source={require('../assets/registerScreen.jpg')}/>
+          <View style={{flex: .5, width: Dimensions.get('window').width, backgroundColor: 'transparent'}}>
+            <Text style={{fontSize: 50, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>Come Catch a Ride!</Text>
           </View>
-          <View style={{flex: 1, justifyContent: 'center', width: Dimensions.get('window').width}}>
-              <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.submit(this.state.username, this.state.password, this.state.passwordRepeat, this.state.email)} }>
-                <Text style={styles.buttonLabel}>Tap to Register</Text>
-              </TouchableOpacity>
+          <View style={{flex: 1, width: Dimensions.get('window').width}}>
+            <View>
+              <TextInput
+                  style={styles.inputField2}
+                  placeholder="Email Address"
+                  onChangeText={(text) => this.setEmail(text)}
+              ></TextInput>
+              <TextInput
+                  style={styles.inputField2}
+                  placeholder="Username"
+                  onChangeText={(text) => this.setUsername(text)}
+              ></TextInput>
+              <TextInput
+                  style={styles.inputField2}
+                  placeholder="Password"
+                  secureTextEntry={true}
+                  onChangeText={(text) => this.setPassword(text)}
+              ></TextInput>
+              <TextInput
+                  style={styles.inputField2}
+                  placeholder="Confirm Password"
+                  secureTextEntry={true}
+                  onChangeText={(text) => this.setPasswordRepeat(text)}
+              ></TextInput>
+            </View>
+            <View style={{flex: 1, justifyContent: 'center', width: Dimensions.get('window').width}}>
+                <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.submit(this.state.username, this.state.password, this.state.passwordRepeat, this.state.email)} }>
+                  <Text style={styles.buttonLabel}>Tap to Register</Text>
+                </TouchableOpacity>
+            </View>
           </View>
-        </View>
-    </View>
+      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
