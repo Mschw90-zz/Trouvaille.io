@@ -6,6 +6,7 @@ import { DOMAIN } from './env.js';
 import NewTripScreen from './components/NewTripScreen.js'
 import RegisterScreen from './components/RegisterScreen.js'
 import UserFeedScreen from './components/UserFeedScreen.js'
+import ProfileScreen from './components/ProfileScreen.js'
 import styles from './styles.js'
 
 //Login Page
@@ -172,12 +173,6 @@ class LoginScreen extends React.Component {
 
 //Navigator
 export default StackNavigator({
-  // LandingPage: {
-  //   screen: LandingScreen,
-  //   navigationOptions: {
-  //     header: null,
-  //   },
-  // },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -196,5 +191,8 @@ export default StackNavigator({
   },
   NewTrip: {
     screen: NewTripScreen,
+  },
+  Profile: {
+    screen: ProfileScreen,
   },
 }, {initialRouteName: 'Login'});

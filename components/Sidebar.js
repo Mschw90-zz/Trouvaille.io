@@ -46,6 +46,10 @@ export default class Sidebar extends Component {
     });
   }
 
+  profileScreen() {
+    this.props.navigation.navigate('Profile')
+  }
+
   render() {
     return (
           <Content style={{backgroundColor:'rgba(28,28,28,.9)'}}>
@@ -53,7 +57,7 @@ export default class Sidebar extends Component {
               style={{width:100, height: 100, marginLeft: 100}}
               source={require('../assets/rick_ricknmorty.png')}
             />
-            <Button style={{color: 'white'}} title='Profile'></Button>
+            <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
             <Button title='Explore Local Trips'></Button>
             <Button title='Previous Trips'></Button>
             <Button title='Popular Trips'></Button>
