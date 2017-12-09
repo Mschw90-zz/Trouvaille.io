@@ -42,13 +42,13 @@ export default class ProfileScreen extends React.Component {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
         console.log(response.body);
-        fetch(`${DOMAIN}/profileAddPic`, {
+        fetch(`${DOMAIN}/photoUpdate`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            url: response.body.uri
+            profileURL: response.body.uri
           })
         })
         .then((response) => {
