@@ -20,7 +20,7 @@ import {
   FooterTab} from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Sidebar from './Sidebar.js';
-import { Constants, Facebook } from 'expo';
+import { Constants, Facebook, LinearGradient } from 'expo';
 import { DOMAIN } from '../env.js';
 import styles from '../styles.js'
 
@@ -30,6 +30,10 @@ export default class NewTripScreen extends React.Component {
       super(props);
       this.state = {}
     }
+
+    static navigationOptions = {
+      title: 'New Trip'
+    };
 
     newDrivePage() {
       this.props.navigation.navigate('NewDrive');
@@ -41,30 +45,21 @@ export default class NewTripScreen extends React.Component {
 
     render() {
       return (
-        <Container>
-
-
-          <Content>
-            <Text style={{textAlign:'center', fontWeight:'bold', fontSize: 35}}>
-              Would you like to be a driver or passenger?
+        <LinearGradient colors={['#00C9FF', '#92FE9D']} style={styles.background}>
+            <View style={{flex:.5, alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}>
+            <Text style={{fontSize: 35, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>
+              Would you like to be a Driver or Passenger?
             </Text>
-            <View style={{flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row', marginTop: 115, marginLeft: 33}}>
-              <Button style={{backgroundColor: '#379df1', width: 150, height: 150, paddingTop: 55, paddingLeft: 20}}>
-                <Icon name='ios-car' onPress={() => {this.newDrivePage()}} style={{fontSize: 90, marginBottom: 50, color: '#f7d432'}} />
+            </View>
+            <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', flex: 1, width: Dimensions.get('window').width}}>
+              <Button onPress={() => {this.newDrivePage()}} style={{backgroundColor: 'transparent', width: 150, height: 150, paddingTop: 55, paddingLeft: 20, borderWidth: 1, borderColor: 'white'}}>
+                <Icon name='ios-car' style={{fontSize: 90, marginBottom: 50, color: 'white'}} />
               </Button>
-              <Button transparent style={{marginLeft: 10, backgroundColor: '#379df1', width: 150, height: 150, paddingTop: 15, paddingLeft: 20}}>
-                <Icon name='ios-briefcase' onPress={() => {this.newPassengerPage()}} style={{color: '#f7d432', fontSize: 90}}/>
+              <Button transparent onPress={() => {this.newPassengerPage()}} style={{marginLeft: 10, backgroundColor: 'transparent', width: 150, height: 150, paddingTop: 15, paddingLeft: 20, borderWidth: 1, borderColor: 'white'}}>
+                <Icon name='ios-briefcase' style={{color: 'white', fontSize: 90}}/>
               </Button>
             </View>
-          </Content>
-          <Footer>
-            <FooterTab>
-              <Button full>
-                <Text>Footer</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
-        </Container>
+        </LinearGradient>
       )
     }
   }
