@@ -50,6 +50,10 @@ export default class Sidebar extends Component {
     this.props.navigation.navigate('Profile')
   }
 
+  settingScreen() {
+    this.props.navigation.navigate('Settings')
+  }
+
   render() {
     return (
           <Content style={{backgroundColor:'rgba(28,28,28,.9)'}}>
@@ -61,7 +65,7 @@ export default class Sidebar extends Component {
             <Button title='Explore Local Trips'></Button>
             <Button title='Previous Trips'></Button>
             <Button title='Popular Trips'></Button>
-            <Button title='Settings'></Button>
+            <Button onPress={() => this.settingScreen()} title='Settings'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </Content>
     );
