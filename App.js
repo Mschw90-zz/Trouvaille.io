@@ -11,6 +11,7 @@ import NewDriveScreen from './components/NewDriveScreen.js'
 import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
+import SettingsScreen from './components/SettingsScreen.js'
 import styles from './styles.js'
 
 //Login Page
@@ -164,7 +165,7 @@ class LoginScreen extends React.Component {
               <Text style={styles.buttonLabel}>Login with FaceBook</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
-              <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}, color: 'white', marginTop: 15}}>Don't have an account?</Text>
+              <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}, color: 'white', marginTop: 15}}>Don&#39;t have an account?</Text>
               <TouchableOpacity onPress={ () => { this.registerPage() } }>
                 <Text style={{textDecorationLine: 'underline', fontSize: 20, color:'#001DF5', marginLeft: 5, marginTop: 15}}>Sign Up</Text>
               </TouchableOpacity>
@@ -212,5 +213,8 @@ export default StackNavigator({
   },
   PassengerMap: {
     screen: PassengerMapScreen,
+  },
+  Settings: {
+    screen: SettingsScreen,
   },
 }, {initialRouteName: 'Login'});
