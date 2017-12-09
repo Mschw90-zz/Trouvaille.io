@@ -11,6 +11,7 @@ import NewDriveScreen from './components/NewDriveScreen.js'
 import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
+import SettingsScreen from './components/SettingsScreen.js'
 import styles from './styles.js'
 
 //Login Page
@@ -212,5 +213,8 @@ export default StackNavigator({
   },
   PassengerMap: {
     screen: PassengerMapScreen,
+  },
+  Settings: {
+    screen: SettingsScreen,
   },
 }, {initialRouteName: 'Login'});

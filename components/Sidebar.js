@@ -44,8 +44,7 @@ export default class Sidebar extends Component {
   profileScreen() {
     this.props.navigation.navigate('Profile')
   }
-
-  settingScreen() {
+  settingPage() {
     this.props.navigation.navigate('Settings')
   }
 
@@ -60,7 +59,7 @@ export default class Sidebar extends Component {
             <Button title='Explore Local Trips'></Button>
             <Button title='Previous Trips'></Button>
             <Button title='Popular Trips'></Button>
-            <Button onPress={() => this.settingScreen()} title='Settings'></Button>
+            <Button onPress={ () => this.settingPage() } title='Settings'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </View>
     );
