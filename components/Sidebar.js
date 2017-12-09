@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  Button,
-  Image,
-  AsyncStorage
-} from 'react-native';
-import {Content} from 'native-base';
+import { Dimensions, Button, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, TouchableWithoutFeedback, Keyboard  } from 'react-native';
+import {Content } from 'native-base';
 import { DOMAIN } from '../env.js';
 
 export default class Sidebar extends Component {
@@ -52,9 +47,9 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-          <Content style={{backgroundColor:'rgba(28,28,28,.9)'}}>
+          <View style={{flex: 1, alignItems: 'center', backgroundColor:'rgba(28,28,28,.9)'}}>
             <Image
-              style={{width:100, height: 100, marginLeft: 100}}
+              style={{width:100, height: 100}}
               source={require('../assets/rick_ricknmorty.png')}
             />
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
@@ -63,7 +58,7 @@ export default class Sidebar extends Component {
             <Button title='Popular Trips'></Button>
             <Button title='Settings'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
-          </Content>
+          </View>
     );
   }
 }

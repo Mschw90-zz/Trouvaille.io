@@ -164,7 +164,7 @@ class LoginScreen extends React.Component {
               <Text style={styles.buttonLabel}>Login with FaceBook</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
-              <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}, color: 'white', marginTop: 15}}>Don't have an account?</Text>
+              <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}, color: 'white', marginTop: 15}}>Don&#39;t have an account?</Text>
               <TouchableOpacity onPress={ () => { this.registerPage() } }>
                 <Text style={{textDecorationLine: 'underline', fontSize: 20, color:'#001DF5', marginLeft: 5, marginTop: 15}}>Sign Up</Text>
               </TouchableOpacity>
@@ -197,6 +197,7 @@ export default StackNavigator({
   },
   NewTrip: {
     screen: NewTripScreen,
+    header:{ style:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 } }
   },
   Profile: {
     screen: ProfileScreen,
