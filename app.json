@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/carTrip.gif",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5DADE2"
     },
     "ios": {
       "supportsTablet": true
