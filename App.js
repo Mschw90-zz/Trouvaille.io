@@ -197,7 +197,6 @@ export default StackNavigator({
   },
   NewTrip: {
     screen: NewTripScreen,
-    header:{ style:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 } }
   },
   Profile: {
     screen: ProfileScreen,
