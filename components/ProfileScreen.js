@@ -52,36 +52,24 @@ export default class ProfileScreen extends React.Component {
           })
         })
         .then((response) => {
-          /* Everything between here and the next comment is added material to fix how the front end is communicating 
-          with this route*/
+          /*
+          This is the response promise that transforms it into a JSON object 
+          */
           
-          console.log(`response as JSON ${response.json()}`);
-          //uncomment the below code if this object is the '{success: true}' object which I expect it to be 
+          console.log('response', response);
+          return response.json();
+        })
+        .then((responseJson) => {
+          console.log(`This is the responseJson ${responseJson}`);
           
-//           if(responseJson.success){
-//             console.log('responsejson', responseJson);
-//             return this.props.navigation.navigate('Profile');
-//           } else {
-//             alert('Picture was not uploaded');
-//             console.log('error in picture fail', responseJson.error);
-//             this.setState({error: responseJson.error});
-//           }
-          
-          /* This is the end of the edited material */
-            
-//           console.log('response', response);
-//           return response.json();
-//         })
-//         .then((responseJson) => {
-//           console.log('responseJson', responseJson);
-//           if(responseJson.success){
-//             console.log('responsejson', responseJson);
-//             return this.props.navigation.navigate('Profile');
-//           } else {
-//             alert('Picture was not uploaded');
-//             console.log('error in picture fail', responseJson.error);
-//             this.setState({error: responseJson.error});
-//           }
+          if(responseJson.success){
+            console.log('responsejson', responseJson);
+            return this.props.navigation.navigate('Profile');
+          } else {
+            alert('Picture was not uploaded');
+            console.log('error in picture fail', responseJson.error);
+            this.setState({error: responseJson.error});
+          }
         })
         .catch((err) => {
           console.log('caught error in catch of add picture', err);
