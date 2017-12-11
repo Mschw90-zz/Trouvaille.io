@@ -52,11 +52,16 @@ export default class ProfileScreen extends React.Component {
           })
         })
         .then((response) => {
+          /*
+          This is the response promise that transforms it into a JSON object 
+          */
+          
           console.log('response', response);
           return response.json();
         })
         .then((responseJson) => {
-          console.log('responseJson', responseJson);
+          console.log(`This is the responseJson ${responseJson}`);
+          
           if(responseJson.success){
             console.log('responsejson', responseJson);
             return this.props.navigation.navigate('Profile');
