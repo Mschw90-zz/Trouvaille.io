@@ -58,7 +58,7 @@ export default class ProfileScreen extends React.Component {
           console.log(`response as JSON ${response.json()}`);
           //uncomment if this object is the {success: true} object which it should be 
           
-          if(responseJson.success){
+//           if(responseJson.success){
 //             console.log('responsejson', responseJson);
 //             return this.props.navigation.navigate('Profile');
 //           } else {
