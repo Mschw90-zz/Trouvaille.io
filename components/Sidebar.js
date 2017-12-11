@@ -4,6 +4,12 @@ import {Content } from 'native-base';
 import { DOMAIN } from '../env.js';
 
 export default class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: ''
+    }
+  }
 
   logout = () => {
     fetch(`${DOMAIN}/logout`, {
@@ -48,12 +54,39 @@ export default class Sidebar extends Component {
     this.props.navigation.navigate('Settings')
   }
 
+  componentDidMount() {
+    fetch(`${DOMAIN}/profileImage`, {
+      method: 'GET',
+    }
+    ).then((response) => {
+      console.log(response);
+      return response.json()
+    })
+    .then((responseJson) => {
+      console.log(responseJson);
+      /* do something with responseJson and go back to the Login view but
+       * make sure to check for responseJson.success! */
+       if(responseJson.success){
+           // return this.props.navigation.goBack();
+          this.setState({image: responseJson.photo})
+       }else{
+           console.log('THERE WAS AN ERROR FINDING PICTURE', responseJson.error);
+       }
+    })
+    .catch((err) => {
+        console.log('no picture found');
+        alert(err)
+      /* do something if there was an error with fetching */
+    });
+  }
+
+
   render() {
     return (
           <View style={{flex: 1, alignItems: 'center', backgroundColor:'rgba(28,28,28,.9)'}}>
             <Image
               style={{width:100, height: 100}}
-              source={require('../assets/rick_ricknmorty.png')}
+              source={{ uri: this.state.image }}
             />
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
             <Button title='Explore Local Trips'></Button>
