@@ -56,7 +56,7 @@ export default class ProfileScreen extends React.Component {
           with this route*/
           
           console.log(`response as JSON ${response.json()}`);
-          //uncomment if this object is the {success: true} object which it should be 
+          //uncomment the below code if this object is the '{success: true}' object which I expect it to be 
           
 //           if(responseJson.success){
 //             console.log('responsejson', responseJson);
