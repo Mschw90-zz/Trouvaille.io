@@ -94,13 +94,7 @@ export default class UserFeedScreen extends React.Component {
               }}>Mock Trip via Connection</Text>
             </Row>
           </Content>
-          <Footer>
-            <FooterTab>
-              <Button full>
-                <Text>Footer</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
+        
         </Container>
       </Drawer>
 

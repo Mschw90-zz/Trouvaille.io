@@ -215,6 +215,6 @@ export default StackNavigator({
     screen: PassengerMapScreen,
   },
   Settings: {
-    screen: SettingsScreen
-  }
+    screen: SettingsScreen,
+  },
 }, {initialRouteName: 'Login'});

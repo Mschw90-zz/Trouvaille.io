@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
 import { RNS3 } from 'react-native-aws3';
-import { DOMAIN } from '../env.js';
+import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
 
 
 
@@ -33,22 +33,22 @@ export default class ProfileScreen extends React.Component {
         keyPrefix: "uploads/",
         bucket: "trouvaille",
         region: "us-east-1",
-        accessKey: process.env.ACCESSKEY,
-        secretKey: process.env.SECRETKEY,
+        accessKey: ACCESSKEY,
+        secretKey: SECRETKEY,
         successActionStatus: 201
       }
 
       RNS3.put(file, options).then(response => {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
-        console.log(response.body);
+        console.log(response.body.postResponse.location, '^^^^^^^^^^^^^');
         fetch(`${DOMAIN}/photoUpdate`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            profileURL: response.body.uri
+            profileURL: response.body.postResponse.location
           })
         })
         .then((response) => {
@@ -107,9 +107,7 @@ export default class ProfileScreen extends React.Component {
           title="Take picture"
           onPress={this._takePhoto}
         />
-        <Button
-          title="delete picture"
-        />
+        
         {this.state.image &&
           <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />}
       </View>
