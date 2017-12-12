@@ -14,5 +14,5 @@ In order to scale our application, as both a mobile app and a website we decided
 
 | Design Location | Link to Source Code |
 | --- | --- |
-| Front End | [] |
-| Back End | [https://github.com/TScafeJR/Ride-Server] |
+| Front End | https://github.com/Mschw90/Trouvaille.io/tree/TScafeJR-patch-2 |
+| Back End | https://github.com/TScafeJR/Ride-Server |
