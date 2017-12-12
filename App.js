@@ -162,7 +162,7 @@ class LoginScreen extends React.Component {
                 <Text style={styles.buttonLabel}>Tap to Login</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={ () => {this._handleFacebookLogin()} }>
-              <Text style={styles.buttonLabel}>Login with FaceBook</Text>
+              <Text style={styles.buttonLabel}>Login with Facebook</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
               <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}, color: 'white', marginTop: 15}}>Don&#39;t have an account?</Text>
