@@ -17,7 +17,7 @@ export default class NewDriveScreen extends React.Component {
     return (
       <Container>
         <Header>
-          <Button onPress={() => {this.DriverDestinationMap()}} style={{paddingTop: 88, marginBottom: 33, width: Dimensions.get('window').width}}><Text>Da Map</Text></Button>
+          <Button onPress={() => {this.DriverDestinationMap()}} style={{backgroundColor: 'red', paddingTop: 88, marginBottom: 33, width: Dimensions.get('window').width}}><Text>Da Map</Text></Button>
         </Header>
         <Content>
           <Form>
