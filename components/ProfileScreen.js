@@ -9,9 +9,36 @@ import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
 export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {image: null}
+    this.state = {
+      image: ''
+    }
   }
 
+  componentDidMount() {
+    fetch(`${DOMAIN}/profileImage`, {
+      method: 'GET',
+    }
+    ).then((response) => {
+      console.log(response);
+      return response.json()
+    })
+    .then((responseJson) => {
+      console.log(responseJson);
+      /* do something with responseJson and go back to the Login view but
+       * make sure to check for responseJson.success! */
+       if(responseJson.success){
+           // return this.props.navigation.goBack();
+          this.setState({image: responseJson.photo})
+       }else{
+           console.log('THERE WAS AN ERROR FINDING PICTURE', responseJson.error);
+       }
+    })
+    .catch((err) => {
+        console.log('no picture found');
+        alert(err)
+      /* do something if there was an error with fetching */
+    });
+  }
 
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -99,6 +126,7 @@ export default class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />
         <Button
           title="Pick an image from camera roll"
           onPress={this._pickImage}
@@ -107,9 +135,6 @@ export default class ProfileScreen extends React.Component {
           title="Take picture"
           onPress={this._takePhoto}
         />
-        
-        {this.state.image &&
-          <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />}
       </View>
     );
   }
