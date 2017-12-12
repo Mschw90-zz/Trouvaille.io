@@ -1,8 +1,7 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import {
-  Container, Header, Button, Body, Icon, Content, Item, Form, Input } from 'native-base';
+import {Container, Header, Button, Body, Icon, Content, Item, Form, Input } from 'native-base';
 
 export default class NewDriveScreen extends React.Component {
   constructor(props){
