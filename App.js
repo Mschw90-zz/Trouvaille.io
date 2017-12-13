@@ -12,6 +12,8 @@ import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
 import SettingsScreen from './components/SettingsScreen.js'
+import SpotifyScreen from './components/SpotifyScreen.js'
+import NadaScreen from './components/Nada.js'
 import styles from './styles.js'
 
 //Login Page
@@ -37,7 +39,6 @@ class LoginScreen extends React.Component {
           // Get the user's name using Facebook's Graph API
           const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
           const profile = await response.json();
-          console.log(profile);
           Alert.alert(
             'Logged in!',
             `Hi ${profile.name}!`,
@@ -69,7 +70,6 @@ class LoginScreen extends React.Component {
   componentDidMount() {
     AsyncStorage.getItem('user')
     .then(result => {
-      console.log(result, '@@@@@@@@@');
       if (result) {
         var parsedResult = JSON.parse(result);
         var username = parsedResult.username;
@@ -80,6 +80,7 @@ class LoginScreen extends React.Component {
           .then( resp => console.log(resp))
         }
       }
+      return
     }).catch(err => {console.log(err)});
   }
 
@@ -95,13 +96,10 @@ class LoginScreen extends React.Component {
       })
     })
     .then((response) => {
-      console.log('response', response);
       return response.json();
     })
     .then((responseJson) => {
-      console.log('responseJson', responseJson);
       if(responseJson.success){
-        console.log('responsejson', responseJson);
         AsyncStorage.setItem('user', JSON.stringify({
           username: username,
           password: password
@@ -133,7 +131,6 @@ class LoginScreen extends React.Component {
   }
 
   render() {
-    console.log(styles);
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}>
@@ -210,7 +207,7 @@ export default StackNavigator({
     screen: NewDriveScreen,
   },
   NewPassenger: {
-    screen: NewPassengerScreen,
+    screen: SpotifyScreen,
   },
   DriverMap: {
     screen: DriverMapScreen,
@@ -220,5 +217,8 @@ export default StackNavigator({
   },
   Settings: {
     screen: SettingsScreen,
+  },
+  HoldingSpot: {
+    screen: NadaScreen
   },
 }, {initialRouteName: 'Login'});

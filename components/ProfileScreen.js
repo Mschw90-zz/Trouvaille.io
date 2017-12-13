@@ -19,11 +19,9 @@ export default class ProfileScreen extends React.Component {
       method: 'GET',
     }
     ).then((response) => {
-      console.log(response);
       return response.json()
     })
     .then((responseJson) => {
-      console.log(responseJson);
       /* do something with responseJson and go back to the Login view but
        * make sure to check for responseJson.success! */
        if(responseJson.success){
@@ -46,7 +44,6 @@ export default class ProfileScreen extends React.Component {
       aspect: [4, 3],
     });
 
-      console.log(result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });
       const file = {
@@ -68,7 +65,6 @@ export default class ProfileScreen extends React.Component {
       RNS3.put(file, options).then(response => {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
-        console.log(response.body.postResponse.location, '^^^^^^^^^^^^^');
         fetch(`${DOMAIN}/photoUpdate`, {
           method: 'POST',
           headers: {
@@ -79,13 +75,10 @@ export default class ProfileScreen extends React.Component {
           })
         })
         .then((response) => {
-          console.log('response', response);
           return response.json();
         })
         .then((responseJson) => {
-          console.log('responseJson', responseJson);
           if(responseJson.success){
-            console.log('responsejson', responseJson);
             return this.props.navigation.navigate('Profile');
           } else {
             alert('Picture was not uploaded');
