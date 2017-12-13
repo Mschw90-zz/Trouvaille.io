@@ -37,6 +37,10 @@ export default class UserFeedScreen extends React.Component {
     this.props.navigation.navigate('NewTrip')
   }
 
+  specificTripPage() {
+    this.props.navigation.navigate('SpecificTrip')
+  }
+
   closeDrawer = () => {
     this.drawer._root.close()
   };
@@ -69,7 +73,7 @@ export default class UserFeedScreen extends React.Component {
             </Right>
           </Header>
           <Content style={{ display: 'flex'}}>
-            <Row style={{height: 75, backgroundColor: 'violet',  borderWidth: 1, borderColor: 'black'}}>
+            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'violet',  borderWidth: 1, borderColor: 'black'}}>
               <Row style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -97,7 +101,7 @@ export default class UserFeedScreen extends React.Component {
 
             </Row>
 
-            <Row style={{height: 75, backgroundColor: 'dodgerblue',  borderWidth: 1, borderColor: 'black'}}>
+            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'dodgerblue',  borderWidth: 1, borderColor: 'black'}}>
               <Row style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -125,7 +129,7 @@ export default class UserFeedScreen extends React.Component {
 
             </Row>
 
-            <Row style={{height: 75, backgroundColor: 'lime',  borderWidth: 1, borderColor: 'black'}}>
+            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'lime',  borderWidth: 1, borderColor: 'black'}}>
               <Row style={{
                 alignItems: 'center',
                 justifyContent: 'center',
