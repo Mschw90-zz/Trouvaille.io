@@ -10,7 +10,10 @@ export default class SpecificTripScreen extends React.Component {
   render() {
     return (
       <View>
-        <Text>SpecificTripPage!</Text>
+        <Text>Mapped Destination</Text>
+        <Text>Date, 01, 2017</Text>
+        <Text>Name of Trip (Coachella Roadtrip)</Text>
+        <Text>(100) seats left</Text>
       </View>
     )
   }

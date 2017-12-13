@@ -74,16 +74,18 @@ export default class UserFeedScreen extends React.Component {
           </Header>
           <Content style={{ display: 'flex'}}>
             <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'violet',  borderWidth: 1, borderColor: 'black'}}>
+              <Icon name='ios-happy' />
               <Row style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 flex: 1,
                 left: 75
               }}>
+
                 <Text style={{
                   fontWeight: 'bold',
                   alignSelf: 'flex-start'
-                }}>Coachella Roadtrip</Text>
+                }}>Tyrone is going to: Coachella Roadtrip</Text>
               </Row>
               <Row style={{flex: 1, flexDirection: 'row'}}>
                 <Text style={{
@@ -102,6 +104,7 @@ export default class UserFeedScreen extends React.Component {
             </Row>
 
             <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'dodgerblue',  borderWidth: 1, borderColor: 'black'}}>
+              <Icon name='ios-happy' />
               <Row style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -111,7 +114,7 @@ export default class UserFeedScreen extends React.Component {
                 <Text style={{
                   fontWeight: 'bold',
                   alignSelf: 'flex-start'
-                }}>LA Drive</Text>
+                }}>Matt Schwartz is going to: LA Drive</Text>
               </Row>
               <Row style={{flex: 1, flexDirection: 'row'}}>
                 <Text style={{
@@ -130,6 +133,7 @@ export default class UserFeedScreen extends React.Component {
             </Row>
 
             <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'lime',  borderWidth: 1, borderColor: 'black'}}>
+              <Icon name='ios-happy' />
               <Row style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -139,7 +143,7 @@ export default class UserFeedScreen extends React.Component {
                 <Text style={{
                   fontWeight: 'bold',
                   alignSelf: 'flex-start'
-                }}>Yosemite Camping</Text>
+                }}>Alex Glaze is going to: Yosemite Camping</Text>
               </Row>
               <Row style={{flex: 1, flexDirection: 'row'}}>
                 <Text style={{
