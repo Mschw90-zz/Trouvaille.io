@@ -12,8 +12,6 @@ import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
 import SettingsScreen from './components/SettingsScreen.js'
-import SpotifyScreen from './components/SpotifyScreen.js'
-import NadaScreen from './components/Nada.js'
 import styles from './styles.js'
 
 //Login Page
@@ -77,7 +75,7 @@ class LoginScreen extends React.Component {
         if (username && password) {
           return this.login(username, password)
           .then(resp => resp.json())
-          .then( resp => console.log(resp))
+          .then( resp => {return resp})
         }
       }
       return
@@ -207,7 +205,7 @@ export default StackNavigator({
     screen: NewDriveScreen,
   },
   NewPassenger: {
-    screen: SpotifyScreen,
+    screen: NewPassengerScreen,
   },
   DriverMap: {
     screen: DriverMapScreen,
@@ -217,8 +215,5 @@ export default StackNavigator({
   },
   Settings: {
     screen: SettingsScreen,
-  },
-  HoldingSpot: {
-    screen: NadaScreen
   },
 }, {initialRouteName: 'Login'});

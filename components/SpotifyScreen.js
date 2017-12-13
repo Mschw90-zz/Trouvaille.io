@@ -8,20 +8,34 @@ export default class SpotifyScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            ure: this.props.url
+            url: null
         }
       }
 
       componentDidMount() {
-        console.log(`This is the URI ${this.state.ure}`)
+        fetch(`${DOMAIN}/spotifyUpdate`, {
+          method: 'get',
+          })
+          .then( (response) => {
+          console.log(response)
+          return response.json()
+          })
+          .then((responseJson) =>{
+              console.log(`Found the url ${responseJson.url}`)
+              this.setState({url: responseJson.url})
+          })
+          .catch((error)=>{
+          console.log(`There was an error making the initial spoftify request`)
+          })
       }
     
   render() {
-    const uri = this.state.ure;
-    return (
+    var uri = this.state.url
+    console.log(uri)
+    return uri !== null ? (
       <WebView
         ref={(ref) => { this.webview = ref; }}
-        source={{ uri }}
+        source={{ uri  }}
         onNavigationStateChange={(event) => {
           if (event.url !== uri) {
             this.webview.stopLoading();
@@ -29,6 +43,6 @@ export default class SpotifyScreen extends Component {
           }
         }}
       />
-    );
+    ) : <Text> Loading.... </Text>
   }
 }
