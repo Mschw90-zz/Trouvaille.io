@@ -1,40 +1,89 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import {Container, Header, Button, Body, Icon, Content, Item, Form, Input } from 'native-base';
+import { Container, Header, Button, Body, Icon, Content, Item, Form, Input } from 'native-base';
 import MapView from 'react-native-maps';
+
+const {width, height} = Dimensions.get('window');
+const SCREEN_HEIGHT = height
+const SCREEN_WIDTH = width
+const ASPECT_RATIO = width / height
+const LATITUDE_DELTA = 0.0922
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
 export default class DriverMapScreen extends React.Component {
   constructor(props){
     super(props)
-    this.state = {}
+    //hardcoded bc geolocation didnt work
+    this.state = {
+      initialPosition: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0
+      },
+      markerPosition: {
+        latitude: 0,
+        longitude: 0,
+      }
+    }
   }
 
+  watchID: ?number = null;
+
   componentDidMount() {
-    //get geo location and set variable object equal to intialRegion. set that as
-    // a state and then inset that state into the mapview
+    console.log('mounttttting');
+    navigator.geolocation.getCurrentPosition((position) => {
+      var lat = parseFloat(position.coords.latitude)
+      var  long = parseFloat(position.coords.longitude)
+
+      var initialRegion = {
+        latitude: lat,
+        longitude: long,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta:LONGITUDE_DELTA
+      }
+
+      this.setState({initialPosition: initialRegion})
+      this.setState({markerPosition: initialRegion})
+    },
+    (error) => alert(JSON.stringify(error)),
+    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+
+    // this.watchID = navigator.geoLocation.watchPosition((position) => {
+    //   var lat = parseFloat(position.coords.latitude)
+    //   var long = parseFloat(position.coords.longitude)
+    //
+    //   var lastRegion = {
+    //     latitude: lat,
+    //     longitude: long,
+    //     longitudeDelta: LONGITUDE_DELTA,
+    //     latitudeDelta: LATITUDE_DELTA
+    //   }
+    //
+    //   this.setState({initialPosition: lastRegion})
+    //   this.setState({markerPosition: lastRegion})
+    // })
   }
+
+  componentWillUnmount() {
+    console.log('unmounting');
+    // navigator.geoLocation.clearWatch(this.watchID)
+  }
+
 
   render(){
     return (
       <View style={styles.container}>
         <MapView style={styles.map}
-          initialRegion={{
-            latitude: 37.7716497,
-            longitude: -122.40951819999998,
-             latitudeDelta: 0.1,
-             longitudeDelta: 0.1
-          }}
+          region={this.state.initialPosition}
           loadingEnabled={true}
-          loadingIndicatorColor={'#3a9def'}
+          loadingIndicatorColor={'lime'}
         >
 
           <MapView.Marker
-            coordinate={{
-              latitude: 37.7716497,
-              longitude: -122.40951819999998}}
-              title={"title"}
-              description={"description"}
+            coordinate={this.state.markerPosition}
+            title={"test title"}
+            description={"test description"}
           >
               <View style={styles.radius}>
                 <View style={styles.marker} />
