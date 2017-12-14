@@ -11,6 +11,18 @@ export default class Sidebar extends Component {
     }
   }
 
+  previousTrips = () => {
+    this.props.navigation.navigate('PreviousTrips')
+  }
+
+  popularTrips = () => {
+    this.props.navigation.navigate('PopularTrips')
+  }
+
+  exploreTrips = () => {
+    this.props.navigation.navigate('ExploreTrips')
+  }
+
   logout = () => {
     fetch(`${DOMAIN}/logout`, {
       method: 'GET',
@@ -89,9 +101,9 @@ export default class Sidebar extends Component {
               source={{ uri: this.state.image }}
             />
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
-            <Button title='Explore Local Trips'></Button>
-            <Button title='Previous Trips'></Button>
-            <Button title='Popular Trips'></Button>
+            <Button onPress={ () => this.exploreTrips() } title='Explore Local Trips'></Button>
+            <Button onPress={ () => this.previousTrips() } title='Previous Trips'></Button>
+            <Button onPress={ () => this.popularTrips() } title='Popular Trips'></Button>
             <Button onPress={ () => this.settingPage() } title='Settings'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </View>

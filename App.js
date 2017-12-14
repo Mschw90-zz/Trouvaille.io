@@ -13,6 +13,9 @@ import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
 import SettingsScreen from './components/SettingsScreen.js'
 import SpecificTripScreen from './components/SpecificTripScreen.js'
+import PreviousTripsScreen from './components/PreviousTripsScreen.js'
+import ExploreTripsScreen from './components/ExploreTripsScreen.js'
+import PopularTripsScreen from './components/PopularTripsScreen.js'
 import styles from './styles.js'
 
 //Login Page
@@ -224,5 +227,14 @@ export default StackNavigator({
   },
   SpecificTrip: {
     screen: SpecificTripScreen,
+  },
+  PreviousTrips: {
+    screen: PreviousTripsScreen,
+  },
+  PopularTrips: {
+    screen: PopularTripsScreen,
+  },
+  ExploreTrips: {
+    screen: ExploreTripsScreen,
   },
 }, {initialRouteName: 'Login'});
