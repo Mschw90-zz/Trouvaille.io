@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Image, View, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Dimensions, Image, View, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Text } from 'react-native';
 import { ImagePicker } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import styles from '../styles.js';
@@ -17,14 +17,14 @@ export default class ProfileScreen extends React.Component {
       month: '',
       day: '',
       year: '',
-      bio: '',
       hometown: '',
+      bio: '',
       isDateTimePickerVisible: false,
     }
   }
 
   componentDidMount() {
-    fetch(`${DOMAIN}/profileImage`, {
+    fetch(`${DOMAIN}/profile`, {
       method: 'GET',
     }
     ).then((response) => {
@@ -37,7 +37,15 @@ export default class ProfileScreen extends React.Component {
        * make sure to check for responseJson.success! */
        if(responseJson.success){
            // return this.props.navigation.goBack();
-          this.setState({image: responseJson.photo})
+           console.log(responseJson.birthday, '<<<<<<<<');
+
+          this.setState({
+            image: responseJson.photo,
+            firstName: responseJson.first_name,
+            lastName: responseJson.last_name,
+            hometown: responseJson.hometown,
+            bio: responseJson.bio
+          })
        }else{
            console.log('THERE WAS AN ERROR FINDING PICTURE', responseJson.error);
        }
@@ -122,15 +130,6 @@ export default class ProfileScreen extends React.Component {
   };
 
 
-  _takePhoto = async () => {
-    let pickerResult = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
-
-    this._handleImagePicked(pickerResult);
-  };
-
   goBack() {
     this.props.navigation.navigate('UserFeed')
   }
@@ -139,29 +138,79 @@ export default class ProfileScreen extends React.Component {
     this.props.navigation.navigate('addCar')
   }
 
+  setFirstName(text){
+    let update = Object.assign({}, this.state, {firstName: text})
+    this.setState(update)
+  }
+  setLastName(text){
+    let update = Object.assign({}, this.state, {lastName: text})
+    this.setState(update)
+  }
+  setBirthdayMonth(text){
+    let update = Object.assign({}, this.state, {month: text})
+    this.setState(update)
+  }
+  setBirthdayDay(text){
+    let update = Object.assign({}, this.state, {day: text})
+    this.setState(update)
+  }
+  setBirthdayYear(text){
+    let update = Object.assign({}, this.state, {year: text})
+    this.setState(update)
+  }
+  setBio(text){
+    let update = Object.assign({}, this.state, {bio: text})
+    this.setState(update)
+  }
+  setHometown(text){
+    let update = Object.assign({}, this.state, {hometown: text})
+    this.setState(update)
+  }
+
+  submit(firstName, lastName, month, day, year, hometown, bio) {
+    fetch(`${DOMAIN}/profileUpdate`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        month: month,
+        day: day,
+        year: year,
+        hometown: hometown,
+        bio: bio
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      /* do something with responseJson and go back to the Login view but
+       * make sure to check for responseJson.success! */
+       if(responseJson.success){
+           // return this.props.navigation.goBack();
+           return this.props.navigation.navigate('UserFeed');
+
+       }else{
+           alert(responseJson.error)
+           console.log('THERE WAS AN ERROR', responseJson.error);
+       }
+    })
+    .catch((err) => {
+        console.log('caught error in catch of submt');
+        alert(err)
+      /* do something if there was an error with fetching */
+    });
+  }
+
 
   render() {
     return (
       <ScrollView>
-      <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40}}>
-      <Header style={{ width: Dimensions.get('window').width, marginBottom: 20}}>
-        <Left>
-          <Button transparent>
-            <Icon name='ios-arrow-back' onPress={() => {this.goBack()}}/>
-          </Button>
-        </Left>
-        <Body>
-          <Title>User Feed!</Title>
-        </Body>
-        <Right>
-          <Button transparent>
-            <Icon name='ios-download-outline'/>
-          </Button>
-        </Right>
-      </Header>
+      <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
         {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} /> : null}
         <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
-          <TouchableOpacity onPress={this._pickImage} style={{marginLeft: 10}}>
+          <TouchableOpacity onPress={this._pickImage} style={{marginRight: 10}}>
           <Image
           style={{width:60, height: 60}}
           source={require('../assets/camerarollButton.png')}
@@ -177,11 +226,13 @@ export default class ProfileScreen extends React.Component {
         <Label>First Name</Label>
         <TextInput
             style={styles.inputField2}
+            onChangeText={(text) => this.setFirstName(text)}
         ></TextInput>
 
         <Label>Last Name</Label>
         <TextInput
             style={styles.inputField2}
+            onChangeText={(text) => this.setLastName(text)}
         ></TextInput>
 
         <Label>Birthday</Label>
@@ -191,24 +242,28 @@ export default class ProfileScreen extends React.Component {
               keyboardType = 'numeric'
               style={styles.inputField4}
               maxLength={2}
+              onChangeText={(text) => this.setBirthdayMonth(text)}
           ></TextInput>
           <TextInput
               placeholder='DD'
               keyboardType = 'numeric'
               style={styles.inputField4}
               maxLength={2}
+              onChangeText={(text) => this.setBirthdayDay(text)}
           ></TextInput>
           <TextInput
               placeholder='YYYY'
               keyboardType = 'numeric'
               style={styles.inputField4}
               maxLength={4}
+              onChangeText={(text) => this.setBirthdayYear(text)}
           ></TextInput>
         </View>
 
         <Label>Hometown</Label>
         <TextInput
             style={styles.inputField2}
+            onChangeText={(text) => this.setHometown(text)}
         ></TextInput>
 
         <Label>Bio</Label>
@@ -217,7 +272,12 @@ export default class ProfileScreen extends React.Component {
             numberOfLines={10}
             maxHeight={90}
             style={styles.inputField3}
+            onChangeText={(text) => this.setBio(text)}
         ></TextInput>
+
+        <TouchableOpacity style={[styles.button, styles.buttonLightBlue]} onPress={ () => {this.submit(this.state.firstName, this.state.lastName, this.state.month, this.state.day, this.state.year, this.state.hometown, this.state.bio)}}>
+          <Text style={styles.buttonLabel}>Submit</Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
       </ScrollView>
     );

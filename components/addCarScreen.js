@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Image, View, TextInput, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { Dimensions, Image, View, TextInput, ScrollView, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
 import { ImagePicker } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import styles from '../styles.js';
@@ -84,13 +84,13 @@ export default class ProfileScreen extends React.Component {
       if (response.status !== 201)
         throw new Error("Failed to upload image to S3");
       console.log(response.body.postResponse.location, '^^^^^^^^^^^^^');
-      fetch(`${DOMAIN}/carUpdate`, {
+      fetch(`${DOMAIN}/carPhotoUpdate`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          profileURL: response.body.postResponse.location
+          image: response.body.postResponse.location
         })
       })
       .then((response) => {
@@ -129,7 +129,7 @@ export default class ProfileScreen extends React.Component {
 
  submit(licensePlate, make, model, year) {
 
-   fetch(`${DOMAIN}/register`, {
+   fetch(`${DOMAIN}/carUpdate`, {
      method: 'POST',
      headers: {
        "Content-Type": "application/json"
@@ -147,7 +147,7 @@ export default class ProfileScreen extends React.Component {
       * make sure to check for responseJson.success! */
       if(responseJson.success){
           // return this.props.navigation.goBack();
-          return this.props.navigation.navigate('UserFeed');
+          return this.props.navigation.navigate('Profile');
 
       }else{
           alert(responseJson.error)
@@ -156,7 +156,6 @@ export default class ProfileScreen extends React.Component {
    })
    .catch((err) => {
        console.log('caught error in catch of submt');
-       console.log(`${DOMAIN}/register`);
        alert(err)
      /* do something if there was an error with fetching */
    });
@@ -165,7 +164,7 @@ export default class ProfileScreen extends React.Component {
   render() {
     return (
       <ScrollView>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
+      <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
         {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} /> : null}
         <TouchableOpacity onPress={this._takePhoto}>
           <Image
@@ -207,7 +206,7 @@ export default class ProfileScreen extends React.Component {
           <Text style={styles.buttonLabel}>Submit</Text>
         </TouchableOpacity>
 
-      </View>
+      </KeyboardAvoidingView>
       </ScrollView>
     );
   }

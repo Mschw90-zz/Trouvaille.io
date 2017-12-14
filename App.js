@@ -206,9 +206,6 @@ export default StackNavigator({
   },
   Profile: {
     screen: ProfileScreen,
-    navigationOptions: {
-      header: null,
-    },
   },
   NewDrive: {
     screen: NewDriveScreen,
