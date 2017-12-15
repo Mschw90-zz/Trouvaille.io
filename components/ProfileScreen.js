@@ -11,6 +11,7 @@ export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       image: '',
       firstName: '',
       lastName: '',
@@ -28,21 +29,22 @@ export default class ProfileScreen extends React.Component {
       method: 'GET',
     }
     ).then((response) => {
-      console.log(response);
       return response.json()
     })
     .then((responseJson) => {
-      console.log(responseJson);
       /* do something with responseJson and go back to the Login view but
        * make sure to check for responseJson.success! */
        if(responseJson.success){
            // return this.props.navigation.goBack();
-           console.log(responseJson.birthday, '<<<<<<<<');
-
+           var d = new Date(responseJson.birthday)
           this.setState({
+            id: responseJson.id.toString(),
             image: responseJson.photo,
             firstName: responseJson.first_name,
             lastName: responseJson.last_name,
+            month: (d.getMonth() + 1).toString(),
+            day: (d.getDay()).toString(),
+            year: (d.getFullYear()).toString(),
             hometown: responseJson.hometown,
             bio: responseJson.bio
           })
@@ -63,13 +65,12 @@ export default class ProfileScreen extends React.Component {
       aspect: [4, 3],
     });
 
-      console.log(result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });
       const file = {
         // `uri` can also be a file system path (i.e. file://)
         uri: result.uri,
-        name: "image.png",
+        name: this.state.id,
         type: "image/png"
       }
 
@@ -85,7 +86,6 @@ export default class ProfileScreen extends React.Component {
       RNS3.put(file, options).then(response => {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
-        console.log(response.body.postResponse.location, '^^^^^^^^^^^^^');
         fetch(`${DOMAIN}/photoUpdate`, {
           method: 'POST',
           headers: {
@@ -96,13 +96,10 @@ export default class ProfileScreen extends React.Component {
           })
         })
         .then((response) => {
-          console.log('response', response);
           return response.json();
         })
         .then((responseJson) => {
-          console.log('responseJson', responseJson);
           if(responseJson.success){
-            console.log('responsejson', responseJson);
             return this.props.navigation.navigate('Profile');
           } else {
             alert('Picture was not uploaded');
@@ -225,12 +222,14 @@ export default class ProfileScreen extends React.Component {
         </View>
         <Label>First Name</Label>
         <TextInput
+            value={this.state.firstName}
             style={styles.inputField2}
             onChangeText={(text) => this.setFirstName(text)}
         ></TextInput>
 
         <Label>Last Name</Label>
         <TextInput
+            value={this.state.lastName}
             style={styles.inputField2}
             onChangeText={(text) => this.setLastName(text)}
         ></TextInput>
@@ -238,6 +237,7 @@ export default class ProfileScreen extends React.Component {
         <Label>Birthday</Label>
         <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}>
           <TextInput
+              value={this.state.month}
               placeholder='MM'
               keyboardType = 'numeric'
               style={styles.inputField4}
@@ -245,6 +245,7 @@ export default class ProfileScreen extends React.Component {
               onChangeText={(text) => this.setBirthdayMonth(text)}
           ></TextInput>
           <TextInput
+              value={this.state.day}
               placeholder='DD'
               keyboardType = 'numeric'
               style={styles.inputField4}
@@ -252,6 +253,7 @@ export default class ProfileScreen extends React.Component {
               onChangeText={(text) => this.setBirthdayDay(text)}
           ></TextInput>
           <TextInput
+              value={this.state.year}
               placeholder='YYYY'
               keyboardType = 'numeric'
               style={styles.inputField4}
@@ -262,12 +264,14 @@ export default class ProfileScreen extends React.Component {
 
         <Label>Hometown</Label>
         <TextInput
+            value={this.state.hometown}
             style={styles.inputField2}
             onChangeText={(text) => this.setHometown(text)}
         ></TextInput>
 
         <Label>Bio</Label>
         <TextInput
+            value={this.state.bio}
             multiline={true}
             numberOfLines={10}
             maxHeight={90}

@@ -16,18 +16,15 @@ export default class Sidebar extends Component {
       method: 'GET',
     }
     ).then((response) => {
-      console.log(response);
       return response.json()
     })
     .then( async (responseJson) => {
-      console.log(responseJson);
       /* do something with responseJson and go back to the Login view but
        * make sure to check for responseJson.success! */
        if(responseJson.success){
            // return this.props.navigation.goBack();
            try {
              let logoutAwait = await AsyncStorage.removeItem('user')
-             console.log(logoutAwait,'^^^^^^^^^^^^');
 
            } catch (e) {
              console.log('error in await async logout: ', e);
@@ -41,7 +38,6 @@ export default class Sidebar extends Component {
     })
     .catch((err) => {
         console.log('caught error in catch of submt');
-        console.log(`${DOMAIN}/register`);
         alert(err)
       /* do something if there was an error with fetching */
     });
@@ -59,11 +55,9 @@ export default class Sidebar extends Component {
       method: 'GET',
     }
     ).then((response) => {
-      console.log(response);
       return response.json()
     })
     .then((responseJson) => {
-      console.log(responseJson);
       /* do something with responseJson and go back to the Login view but
        * make sure to check for responseJson.success! */
        if(responseJson.success){

@@ -71,7 +71,7 @@ export default class RegisterScreen extends React.Component {
          * make sure to check for responseJson.success! */
          if(responseJson.success){
              // return this.props.navigation.goBack();
-             return this.props.navigation.navigate('UserFeed');
+             return this.props.navigation.navigate('Login');
 
          }else{
              alert(responseJson.error)

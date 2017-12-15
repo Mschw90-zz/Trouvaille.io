@@ -11,13 +11,48 @@ export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       image: '',
       licensePlate: '',
+      color: '',
       make: '',
       model: '',
       year: ''
     }
   }
+
+  componentDidMount() {
+    fetch(`${DOMAIN}/yourCar`, {
+      method: 'GET',
+    }
+    ).then((response) => {
+      return response.json()
+    })
+    .then((responseJson) => {
+      /* do something with responseJson and go back to the Login view but
+       * make sure to check for responseJson.success! */
+       if(responseJson.success){
+           // return this.props.navigation.goBack();
+          this.setState({
+            id: responseJson.car.id.toString(),
+            image: responseJson.car.image,
+            licensePlate: responseJson.car.license_plate,
+            color: responseJson.car.color,
+            make: responseJson.car.make,
+            model: responseJson.car.model,
+            year: responseJson.car.year ? responseJson.car.year.toString() : '',
+          })
+       }else{
+           console.log('THERE WAS AN ERROR FINDING PICTURE', responseJson.error);
+       }
+    })
+    .catch((err) => {
+        console.log('no picture found');
+        alert(err)
+      /* do something if there was an error with fetching */
+    });
+  }
+
 
   setLicensePlate(text){
     let update = Object.assign({}, this.state, {licensePlate: text})
@@ -34,6 +69,15 @@ export default class ProfileScreen extends React.Component {
         this.setState(update)
     } else {
         alert('Make must be entered')
+    }
+  }
+
+  setColor(text){
+    let update = Object.assign({}, this.state, {color: text})
+    if(text.length > 0 ){
+        this.setState(update)
+    } else {
+        alert('Color must be entered')
     }
   }
 
@@ -83,7 +127,6 @@ export default class ProfileScreen extends React.Component {
     RNS3.put(file, options).then(response => {
       if (response.status !== 201)
         throw new Error("Failed to upload image to S3");
-      console.log(response.body.postResponse.location, '^^^^^^^^^^^^^');
       fetch(`${DOMAIN}/carPhotoUpdate`, {
         method: 'POST',
         headers: {
@@ -94,13 +137,10 @@ export default class ProfileScreen extends React.Component {
         })
       })
       .then((response) => {
-        console.log('response', response);
         return response.json();
       })
       .then((responseJson) => {
-        console.log('responseJson', responseJson);
         if(responseJson.success){
-          console.log('responsejson', responseJson);
           return this.props.navigation.navigate('Profile');
         } else {
           alert('Picture was not uploaded');
@@ -127,7 +167,7 @@ export default class ProfileScreen extends React.Component {
    }
  };
 
- submit(licensePlate, make, model, year) {
+ submit(licensePlate, color, make, model, year) {
 
    fetch(`${DOMAIN}/carUpdate`, {
      method: 'POST',
@@ -136,6 +176,7 @@ export default class ProfileScreen extends React.Component {
      },
      body: JSON.stringify({
        licensePlate: licensePlate,
+       color: color,
        make: make,
        model: model,
        year: year
@@ -175,12 +216,23 @@ export default class ProfileScreen extends React.Component {
 
         <Label>License Plate</Label>
         <TextInput
+            value={this.state.licensePlate}
             placeholder='License Plate'
             style={styles.inputField2}
             onChangeText={(text) => this.setLicensePlate(text)}
         ></TextInput>
+
+        <Label>Color</Label>
+        <TextInput
+            value={this.state.color}
+            placeholder='Color'
+            style={styles.inputField2}
+            onChangeText={(text) => this.setColor(text)}
+        ></TextInput>
+
         <Label>Make</Label>
         <TextInput
+            value={this.state.make}
             placeholder='Make'
             style={styles.inputField2}
             onChangeText={(text) => this.setMake(text)}
@@ -188,6 +240,7 @@ export default class ProfileScreen extends React.Component {
 
         <Label>Model</Label>
         <TextInput
+            value={this.state.model}
             placeholder='Model'
             style={styles.inputField2}
             onChangeText={(text) => this.setModel(text)}
@@ -195,6 +248,7 @@ export default class ProfileScreen extends React.Component {
 
         <Label>Year</Label>
         <TextInput
+            value={this.state.year}
             placeholder='YYYY'
             keyboardType = 'numeric'
             style={styles.inputField2}
@@ -202,7 +256,7 @@ export default class ProfileScreen extends React.Component {
             onChangeText={(text) => this.setCarYear(text)}
         ></TextInput>
 
-        <TouchableOpacity style={[styles.button, styles.buttonLightBlue]} onPress={ () => {this.submit(this.state.licensePlate, this.state.make, this.state.model, this.state.year)}}>
+        <TouchableOpacity style={[styles.button, styles.buttonLightBlue]} onPress={ () => {this.submit(this.state.licensePlate, this.state.color, this.state.make, this.state.model, this.state.year)}}>
           <Text style={styles.buttonLabel}>Submit</Text>
         </TouchableOpacity>
 
