@@ -8,6 +8,11 @@ export default class PreviousTripsScreen extends React.Component {
     this.state = {}
   }
 
+  static navigationOptions = {
+    title: 'Previous Trips'
+  };
+
+
   render() {
     return (
       <View>

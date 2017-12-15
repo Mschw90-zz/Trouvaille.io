@@ -21,6 +21,10 @@ export default class ProfileScreen extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'Add Car'
+  };
+
   componentDidMount() {
     fetch(`${DOMAIN}/yourCar`, {
       method: 'GET',

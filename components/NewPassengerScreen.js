@@ -10,6 +10,10 @@ export default class NewPassengerScreen extends React.Component {
     this.state = {}
   }
 
+  static navigationOptions = {
+    title: 'New Passenger'
+  };
+
   PassengerDestinationMap() {
     this.props.navigation.navigate('PassengerMap');
   }
