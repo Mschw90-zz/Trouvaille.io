@@ -10,6 +10,10 @@ export default class PassengerMapScreen extends React.Component {
     this.state = {}
   }
 
+  static navigationOptions = {
+    title: 'Your Location'
+  };
+
   componentDidMount() {
     //get geo location and set variable object equal to intialRegion. set that as
     // a state and then inset that state into the mapview

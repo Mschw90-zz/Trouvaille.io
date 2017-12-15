@@ -2,11 +2,15 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {Icon} from 'native-base';
 
-export default class PreviousTripsScreen extends React.Component {
+export default class PopularTripsScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
+
+  static navigationOptions = {
+    title: 'Popular Trips'
+  };
 
   render() {
     return (

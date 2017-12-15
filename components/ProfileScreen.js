@@ -24,6 +24,10 @@ export default class ProfileScreen extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'Profile'
+  };
+
   componentDidMount() {
     fetch(`${DOMAIN}/profile`, {
       method: 'GET',
