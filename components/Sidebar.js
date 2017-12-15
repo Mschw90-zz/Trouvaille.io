@@ -11,6 +11,18 @@ export default class Sidebar extends Component {
     }
   }
 
+  previousTrips = () => {
+    this.props.navigation.navigate('PreviousTrips')
+  }
+
+  popularTrips = () => {
+    this.props.navigation.navigate('PopularTrips')
+  }
+
+  exploreTrips = () => {
+    this.props.navigation.navigate('ExploreTrips')
+  }
+
   logout = () => {
     fetch(`${DOMAIN}/logout`, {
       method: 'GET',
@@ -25,7 +37,6 @@ export default class Sidebar extends Component {
            // return this.props.navigation.goBack();
            try {
              let logoutAwait = await AsyncStorage.removeItem('user')
-
            } catch (e) {
              console.log('error in await async logout: ', e);
            }
@@ -80,9 +91,9 @@ export default class Sidebar extends Component {
           <View style={{flex: 1, alignItems: 'center', backgroundColor:'rgba(28,28,28,.9)'}}>
             {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 75, height: 75, marginTop: 25 }} /> : null}
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
-            <Button title='Explore Local Trips'></Button>
-            <Button title='Previous Trips'></Button>
-            <Button title='Popular Trips'></Button>
+            <Button onPress={ () => this.exploreTrips() } title='Explore Local Trips'></Button>
+            <Button onPress={ () => this.previousTrips() } title='Previous Trips'></Button>
+            <Button onPress={ () => this.popularTrips() } title='Popular Trips'></Button>
             <Button onPress={ () => this.settingPage() } title='Settings'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </View>

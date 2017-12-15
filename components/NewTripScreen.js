@@ -40,7 +40,7 @@ export default class NewTripScreen extends React.Component {
     }
 
     newPassengerPage() {
-      this.props.navigation.navigate('NewPassenger');
+      this.props.navigation.navigate('HoldingSpot');
     }
 
     render() {

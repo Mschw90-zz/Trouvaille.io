@@ -37,6 +37,10 @@ export default class UserFeedScreen extends React.Component {
     this.props.navigation.navigate('NewTrip')
   }
 
+  specificTripPage() {
+    this.props.navigation.navigate('SpecificTrip')
+  }
+
   closeDrawer = () => {
     this.drawer._root.close()
   };
@@ -68,32 +72,97 @@ export default class UserFeedScreen extends React.Component {
               </Button>
             </Right>
           </Header>
-          <Content>
-            <Row style={{height: 75, backgroundColor: 'violet'}}>
-              <Text style={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                marginTop: 20,
-                marginLeft: 100
-              }}>Mock Trip via Connection</Text>
+          <Content style={{ display: 'flex'}}>
+            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'violet',  borderWidth: 1, borderColor: 'black'}}>
+              <Icon name='ios-happy' />
+              <Row style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                left: 75
+              }}>
+
+                <Text style={{
+                  fontWeight: 'bold',
+                  alignSelf: 'flex-start'
+                }}>Tyrone is going to: Coachella Roadtrip</Text>
+              </Row>
+              <Row style={{flex: 1, flexDirection: 'row'}}>
+                <Text style={{
+                  alignSelf: 'flex-end',
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  right: 175
+                }}>Dec 25th, 2017</Text>
+                <Text style={{
+                  alignSelf: 'flex-end',
+                  justifyContent: 'space-between',
+                  flex: 1,
+                }}>2 seats left</Text>
+              </Row>
+
             </Row>
-            <Row style={{height: 75, backgroundColor: 'dodgerblue'}}>
-              <Text style={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                marginTop: 20,
-                marginLeft: 100
-              }}>Mock Trip via Connection</Text>
+
+            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'dodgerblue',  borderWidth: 1, borderColor: 'black'}}>
+              <Icon name='ios-happy' />
+              <Row style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                left: 75
+              }}>
+                <Text style={{
+                  fontWeight: 'bold',
+                  alignSelf: 'flex-start'
+                }}>Matt Schwartz is going to: LA Drive</Text>
+              </Row>
+              <Row style={{flex: 1, flexDirection: 'row'}}>
+                <Text style={{
+                  alignSelf: 'flex-end',
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  right: 175
+                }}>Jan. 1st, 2018</Text>
+                <Text style={{
+                  alignSelf: 'flex-end',
+                  justifyContent: 'space-between',
+                  flex: 1,
+                }}>0 seats left</Text>
+              </Row>
+
             </Row>
-            <Row style={{height: 75, backgroundColor: 'lime'}}>
-              <Text style={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                marginTop: 20,
-                marginLeft: 100
-              }}>Mock Trip via Connection</Text>
+
+            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'lime',  borderWidth: 1, borderColor: 'black'}}>
+              <Icon name='ios-happy' />
+              <Row style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                left: 75
+              }}>
+                <Text style={{
+                  fontWeight: 'bold',
+                  alignSelf: 'flex-start'
+                }}>Alex Glaze is going to: Yosemite Camping</Text>
+              </Row>
+              <Row style={{flex: 1, flexDirection: 'row'}}>
+                <Text style={{
+                  alignSelf: 'flex-end',
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  right: 175
+                }}>March 3rd, 2018</Text>
+                <Text style={{
+                  alignSelf: 'flex-end',
+                  justifyContent: 'space-between',
+                  flex: 1,
+                }}>1 seats left</Text>
+              </Row>
+
             </Row>
+
           </Content>
+
         </Container>
       </Drawer>
 

@@ -4,16 +4,23 @@ import { ImagePicker, Facebook, LinearGradient } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import { DOMAIN } from '../env.js';
 import styles from '../styles.js'
+import { StackNavigator } from 'react-navigation';
 
 export default class SettingsScreen extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {image: null}
+      this.state = {
+        image: null
+      }
     }
 
     static navigationOptions = {
       title: 'Settings'
-    };
+    }
+
+    // connectSpotify() {
+    //   this.props.navigation.navigate('HoldingSpot');
+    // }
 
     connectFacebook = async () => {
         try {
@@ -74,28 +81,12 @@ export default class SettingsScreen extends React.Component {
   render() {
     return (
       <LinearGradient colors={['#833ab4', '#fd1d1d', '#fcb045']} style={styles.background}>
-        <TouchableOpacity onPress={this.connectFacebook} style={[styles.spotifyButton, styles.buttonBlue]}>
+        <TouchableOpacity onPress={this.connectFacebook.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
           <Image
           style={{width:30, height: 30, marginRight: 15}}
           source={require('../assets/facebookLogo.png')}
           />
           <Text style={styles.buttonLabel}>Connect to your Facebook account</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.connectSpotify} style={styles.spotifyButton}>
-          <Image
-          style={{width:30, height: 30, marginRight: 15}}
-          source={require('../assets/spotifyLogo.png')}
-          />
-          <Text style={styles.spotifyLabel}>Connect to your Spotify account</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.connectApple} style={[styles.spotifyButton, styles.buttonWhite]}>
-          <Image
-          style={{width:30, height: 30, marginRight: 15}}
-          source={require('../assets/appleLogo.png')}
-          />
-          <Text style={styles.appleLabel}>Connect to Apple Music account</Text>
         </TouchableOpacity>
 
       </LinearGradient>

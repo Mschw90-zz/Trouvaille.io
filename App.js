@@ -12,7 +12,14 @@ import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
 import SettingsScreen from './components/SettingsScreen.js'
+<<<<<<< HEAD
 import addCarScreen from './components/addCarScreen.js'
+=======
+import SpecificTripScreen from './components/SpecificTripScreen.js'
+import PreviousTripsScreen from './components/PreviousTripsScreen.js'
+import ExploreTripsScreen from './components/ExploreTripsScreen.js'
+import PopularTripsScreen from './components/PopularTripsScreen.js'
+>>>>>>> master
 import styles from './styles.js'
 
 //Login Page
@@ -76,9 +83,14 @@ class LoginScreen extends React.Component {
         if (username && password) {
           return this.login(username, password)
           .then(resp => resp.json())
+<<<<<<< HEAD
           .then( resp => return)
+=======
+          .then( resp => {return resp})
+>>>>>>> master
         }
       }
+      return
     }).catch(err => {console.log(err)});
   }
 
@@ -212,12 +224,23 @@ export default StackNavigator({
   },
   PassengerMap: {
     screen: PassengerMapScreen,
-
   },
   Settings: {
     screen: SettingsScreen,
   },
   addCar: {
     screen: addCarScreen,
+  },
+  SpecificTrip: {
+    screen: SpecificTripScreen,
+  },
+  PreviousTrips: {
+    screen: PreviousTripsScreen,
+  },
+  PopularTrips: {
+    screen: PopularTripsScreen,
+  },
+  ExploreTrips: {
+    screen: ExploreTripsScreen,
   },
 }, {initialRouteName: 'Login'});
