@@ -89,10 +89,7 @@ export default class Sidebar extends Component {
   render() {
     return (
           <View style={{flex: 1, alignItems: 'center', backgroundColor:'rgba(28,28,28,.9)'}}>
-            <Image
-              style={{width:75, height: 75, marginTop: 25}}
-              source={{ uri: this.state.image }}
-            />
+            {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 75, height: 75, marginTop: 25 }} /> : null}
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
             <Button onPress={ () => this.exploreTrips() } title='Explore Local Trips'></Button>
             <Button onPress={ () => this.previousTrips() } title='Previous Trips'></Button>

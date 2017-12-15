@@ -12,6 +12,7 @@ import NewPassengerScreen from './components/NewPassengerScreen.js'
 import DriverMapScreen from './components/DriverMapScreen.js'
 import PassengerMapScreen from './components/PassengerMapScreen.js'
 import SettingsScreen from './components/SettingsScreen.js'
+import addCarScreen from './components/addCarScreen.js'
 import SpecificTripScreen from './components/SpecificTripScreen.js'
 import PreviousTripsScreen from './components/PreviousTripsScreen.js'
 import ExploreTripsScreen from './components/ExploreTripsScreen.js'
@@ -219,6 +220,9 @@ export default StackNavigator({
   },
   Settings: {
     screen: SettingsScreen,
+  },
+  addCar: {
+    screen: addCarScreen,
   },
   SpecificTrip: {
     screen: SpecificTripScreen,
