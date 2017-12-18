@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dimensions, Button, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, TouchableWithoutFeedback, Keyboard  } from 'react-native';
 import {Content } from 'native-base';
 import { DOMAIN } from '../env.js';
+import styles from '../styles.js';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -73,6 +74,7 @@ export default class Sidebar extends Component {
        * make sure to check for responseJson.success! */
        if(responseJson.success){
            // return this.props.navigation.goBack();
+           console.log(responseJson);
           this.setState({image: responseJson.photo})
        }else{
            console.log('THERE WAS AN ERROR FINDING PICTURE', responseJson.error);
@@ -88,8 +90,11 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-          <View style={{flex: 1, alignItems: 'center', backgroundColor:'rgba(28,28,28,.9)'}}>
-            {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 75, height: 75, marginTop: 25 }} /> : null}
+          <View style={styles.sidebarView}>
+            <Image
+              style={styles.sidebarProfPic}
+              source={{ uri: this.state.image }}
+            />
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
             <Button onPress={ () => this.exploreTrips() } title='Explore Local Trips'></Button>
             <Button onPress={ () => this.previousTrips() } title='Previous Trips'></Button>
