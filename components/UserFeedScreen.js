@@ -1,28 +1,12 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import {
-  Container,
-  Drawer,
-  Header,
-  Title,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Content,
-  Form,
-  Item,
-  Input,
-  Label,
-  Footer,
-  FooterTab} from 'native-base';
+import { Container, Drawer, Header, Title, Button, Left, Right, Body, Icon, Content } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Constants, Facebook } from 'expo';
 import { DOMAIN } from '../env.js';
-import styles from '../styles.js'
 import Sidebar from './Sidebar.js';
+import styles from '../styles.js'
 
 
 
@@ -30,7 +14,9 @@ import Sidebar from './Sidebar.js';
 export default class UserFeedScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {sideBarOpen: false}
+    this.state = {
+      trips: [],
+    }
   }
 
   newTripPage() {
@@ -43,18 +29,40 @@ export default class UserFeedScreen extends React.Component {
 
   closeDrawer = () => {
     this.drawer._root.close()
-  };
+  }
+
   openDrawer = () => {
     this.drawer._root.open()
-  };
+  }
+
+  componentWillMount() {
+    fetch(`${DOMAIN}/`, {
+      method: 'GET',
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((responseJson) => {
+      if (responseJson.success) {
+        this.setState({trips: responseJson.trips})
+      } else {
+        console.log('There was an error finding your trip feed', responseJson.error);
+      }
+    })
+    .catch((err) => {
+      console.log('no trip feed found');
+      alert(err)
+    });
+  }
 
   render() {
     return (
       <Drawer
-        style={{width: 200, backgroundColor: 'grey'}}
+        style={styles.drawer}
         ref={(ref) => { this.drawer = ref; }}
         content={<Sidebar navigation={this.props.navigation} />}
-        onClose={() => this.closeDrawer()} >
+        onClose={() => this.closeDrawer()}
+      >
 
         <Container>
           <Header>
@@ -73,99 +81,39 @@ export default class UserFeedScreen extends React.Component {
             </Right>
           </Header>
           <Content style={{ display: 'flex'}}>
-            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'violet',  borderWidth: 1, borderColor: 'black'}}>
-              <Icon name='ios-happy' />
-              <Row style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-                left: 75
-              }}>
-
-                <Text style={{
-                  fontWeight: 'bold',
-                  alignSelf: 'flex-start'
-                }}>Tyrone is going to: Coachella Roadtrip</Text>
+            <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
+              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Row style={styles.testTripDetailsRow}>
+                <Text style={styles.testTripDetails}>Tyrone is going to: Coachella Roadtrip</Text>
               </Row>
-              <Row style={{flex: 1, flexDirection: 'row'}}>
-                <Text style={{
-                  alignSelf: 'flex-end',
-                  flex: 1,
-                  justifyContent: 'flex-start',
-                  right: 175
-                }}>Dec 25th, 2017</Text>
-                <Text style={{
-                  alignSelf: 'flex-end',
-                  justifyContent: 'space-between',
-                  flex: 1,
-                }}>2 seats left</Text>
+              <Row style={styles.testTripDetailsRow2}>
+                <Text style={styles.testTripDate}>Dec 25th, 2017</Text>
+                <Text style={styles.testTripSeats}>2 seats left</Text>
               </Row>
-
             </Row>
-
-            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'dodgerblue',  borderWidth: 1, borderColor: 'black'}}>
-              <Icon name='ios-happy' />
-              <Row style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-                left: 75
-              }}>
-                <Text style={{
-                  fontWeight: 'bold',
-                  alignSelf: 'flex-start'
-                }}>Matt Schwartz is going to: LA Drive</Text>
+            <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
+              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Row style={styles.testTripDetailsRow}>
+                <Text style={styles.testTripDetails}>Matt Schwartz is going to: LA Drive</Text>
               </Row>
-              <Row style={{flex: 1, flexDirection: 'row'}}>
-                <Text style={{
-                  alignSelf: 'flex-end',
-                  flex: 1,
-                  justifyContent: 'flex-start',
-                  right: 175
-                }}>Jan. 1st, 2018</Text>
-                <Text style={{
-                  alignSelf: 'flex-end',
-                  justifyContent: 'space-between',
-                  flex: 1,
-                }}>0 seats left</Text>
+              <Row style={styles.testTripDetailsRow2}>
+                <Text style={styles.testTripDate}>Jan. 1st, 2018</Text>
+                <Text style={styles.testTripSeats}>0 seats left</Text>
               </Row>
-
             </Row>
-
-            <Row onPress={() => {this.specificTripPage()}} style={{height: 75, backgroundColor: 'lime',  borderWidth: 1, borderColor: 'black'}}>
-              <Icon name='ios-happy' />
-              <Row style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-                left: 75
-              }}>
-                <Text style={{
-                  fontWeight: 'bold',
-                  alignSelf: 'flex-start'
-                }}>Alex Glaze is going to: Yosemite Camping</Text>
+            <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
+              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Row style={styles.testTripDetailsRow}>
+                <Text style={styles.testTripDetails}>Alex Glaze is going to: Yosemite Camping</Text>
               </Row>
-              <Row style={{flex: 1, flexDirection: 'row'}}>
-                <Text style={{
-                  alignSelf: 'flex-end',
-                  flex: 1,
-                  justifyContent: 'flex-start',
-                  right: 175
-                }}>March 3rd, 2018</Text>
-                <Text style={{
-                  alignSelf: 'flex-end',
-                  justifyContent: 'space-between',
-                  flex: 1,
-                }}>1 seats left</Text>
+              <Row style={styles.testTripDetailsRow2}>
+                <Text style={styles.testTripDate}>March 3rd, 2018</Text>
+                <Text style={styles.testTripSeats}>1 seats left</Text>
               </Row>
-
             </Row>
-
           </Content>
-
         </Container>
       </Drawer>
-
     )
   }
 }
