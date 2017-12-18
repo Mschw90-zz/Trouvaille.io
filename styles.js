@@ -38,6 +38,37 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.9)'
   },
+  inputField3: {
+    alignSelf: 'stretch',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 5,
+    height: 90,
+    // borderColor: 'gray',
+    borderWidth: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)'
+  },
+  inputField4: {
+    alignSelf: 'stretch',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 5,
+    height: 50,
+    // borderColor: 'gray',
+    borderWidth: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    width: 90
+  },
   background: {
     flex: 1,
     justifyContent: "center",
@@ -86,8 +117,8 @@ const styles = StyleSheet.create({
   buttonGold: {
     backgroundColor: '#FFDF00'
   },
-  buttonWhite: {
-    backgroundColor: 'white'
+  buttonLightBlue: {
+    backgroundColor: '#95CDF6'
   },
   buttonLabel: {
     textAlign: 'center',

@@ -149,6 +149,10 @@ export default class NewDriveScreen extends React.Component {
     });
   }
 
+  static navigationOptions = {
+    title: 'New Driver'
+  };
+
   DriverDestinationMap() {
     this.props.navigation.navigate('DriverMap');
   }
