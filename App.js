@@ -17,7 +17,36 @@ import SpecificTripScreen from './components/SpecificTripScreen.js'
 import PreviousTripsScreen from './components/PreviousTripsScreen.js'
 import ExploreTripsScreen from './components/ExploreTripsScreen.js'
 import PopularTripsScreen from './components/PopularTripsScreen.js'
+import {
+  setCustomView,
+  setCustomTextInput,
+  setCustomText,
+  setCustomImage,
+  setCustomTouchableOpacity
+} from 'react-native-global-props';
 import styles from './styles.js'
+
+const customTextInputProps = {
+  underlineColorAndroid: 'rgba(0,0,0,0)',
+  style: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: 'white'
+  }
+};
+
+const customTextProps = {
+  style: {
+    fontSize: 16,
+    fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
+    color: 'black'
+  }
+};
+
+setCustomTextInput(customTextInputProps);
+setCustomText(customTextProps);
 
 //Login Page
 class LoginScreen extends React.Component {
