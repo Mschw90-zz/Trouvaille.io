@@ -243,4 +243,4 @@ export default StackNavigator({
       header: null,
     },
   },
-}, {initialRouteName: 'ChatBox'});
+}, {initialRouteName: 'Login'});
