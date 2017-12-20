@@ -82,7 +82,7 @@ export default class UserFeedScreen extends React.Component {
           </Header>
           <Content style={{ display: 'flex'}}>
             <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
               <Row style={styles.testTripDetailsRow}>
                 <Text style={styles.testTripDetails}>Tyrone is going to: Coachella Roadtrip</Text>
               </Row>
@@ -92,7 +92,7 @@ export default class UserFeedScreen extends React.Component {
               </Row>
             </Row>
             <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
               <Row style={styles.testTripDetailsRow}>
                 <Text style={styles.testTripDetails}>Matt Schwartz is going to: LA Drive</Text>
               </Row>
@@ -102,7 +102,7 @@ export default class UserFeedScreen extends React.Component {
               </Row>
             </Row>
             <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
               <Row style={styles.testTripDetailsRow}>
                 <Text style={styles.testTripDetails}>Alex Glaze is going to: Yosemite Camping</Text>
               </Row>
