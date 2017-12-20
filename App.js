@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, TouchableWithoutFeedback, Keyboard  } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, TouchableWithoutFeedback, Keyboard, Platform  } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { Constants, Facebook } from 'expo';
+import { Constants, Facebook, Font } from 'expo';
 import { DOMAIN } from './env.js';
 import NewTripScreen from './components/NewTripScreen.js'
 import RegisterScreen from './components/RegisterScreen.js'
@@ -18,7 +18,37 @@ import PreviousTripsScreen from './components/PreviousTripsScreen.js'
 import ExploreTripsScreen from './components/ExploreTripsScreen.js'
 import PopularTripsScreen from './components/PopularTripsScreen.js'
 import ChatScreen from './components/ChatScreen.js'
+import PaymentScreen from './components/Payment.js'
+import {
+  setCustomView,
+  setCustomTextInput,
+  setCustomText,
+  setCustomImage,
+  setCustomTouchableOpacity
+} from 'react-native-global-props';
 import styles from './styles.js'
+
+const customTextInputProps = {
+  underlineColorAndroid: 'rgba(0,0,0,0)',
+  style: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: 'white'
+  }
+};
+
+const customTextProps = {
+  style: {
+    fontSize: 18,
+    fontFamily: Platform.OS === 'ios' ? 'KannadaSangamMN' : 'Roboto',
+    color: 'black'
+  }
+};
+
+setCustomTextInput(customTextInputProps);
+setCustomText(customTextProps);
 
 //Login Page
 class LoginScreen extends React.Component {
@@ -28,7 +58,12 @@ class LoginScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {error: '', username: '', password: ''}
+    this.state = {
+      error: '',
+      username: '',
+      password: '',
+      fontLoaded: false
+    }
   }
 
   _handleFacebookLogin = async () => {
@@ -85,7 +120,10 @@ class LoginScreen extends React.Component {
         }
       }
       return
-    }).catch(err => {console.log(err)});
+    })
+    .catch(err => {
+      return
+    });
   }
 
   login(username, password) {
@@ -244,3 +282,7 @@ export default StackNavigator({
     },
   },
 }, {initialRouteName: 'ChatBox'});
+  Payment: {
+    screen: PaymentScreen
+  }
+}, {initialRouteName: 'Login'});
