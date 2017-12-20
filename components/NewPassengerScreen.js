@@ -1,8 +1,8 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import {
-  Container, Header, Button, Body, Icon, Content, Item, Form, Input } from 'native-base';
+import { Container, Header, Button, Body, Icon, Content, Item, Form, Input } from 'native-base';
+import styles from '../styles.js';
 
 export default class NewPassengerScreen extends React.Component {
   constructor(props){
@@ -22,7 +22,7 @@ export default class NewPassengerScreen extends React.Component {
     return (
       <Container>
         <Header>
-          <Button onPress={() => {this.PassengerDestinationMap()}} style={{paddingTop: 88, marginBottom: 33, width: Dimensions.get('window').width}}><Text>Da Map</Text></Button>
+          <Button onPress={() => {this.PassengerDestinationMap()}} style={styles.mapButton}><Text>Da Map</Text></Button>
         </Header>
         <Content>
           <Form>
@@ -37,6 +37,9 @@ export default class NewPassengerScreen extends React.Component {
             </Item>
             <Item last>
               <Input placeholder="$ contribution: " />
+            </Item>
+            <Item>
+              <Button style={styles.submitButton} full><Text>Submit</Text></Button>
             </Item>
           </Form>
         </Content>
