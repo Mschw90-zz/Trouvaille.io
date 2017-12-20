@@ -236,7 +236,4 @@ export default StackNavigator({
   ExploreTrips: {
     screen: ExploreTripsScreen,
   },
-  Map: {
-    screen: MapScreen,
-  },
 }, {initialRouteName: 'Login'});
