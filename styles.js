@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
   testTripDetailsRow2: {
     flex: 1,
     flexDirection: 'row',
-    fontSize: 12
   },
   testTripDate: {
     alignSelf: 'flex-end',

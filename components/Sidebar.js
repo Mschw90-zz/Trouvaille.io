@@ -91,6 +91,8 @@ export default class Sidebar extends Component {
   render() {
     return (
           <View style={styles.sidebarView}>
+            {/* this image is generating an error upon login.
+            the error comes from source = uri */}
             <Image
               style={styles.sidebarProfPic}
               source={{ uri: this.state.image }}

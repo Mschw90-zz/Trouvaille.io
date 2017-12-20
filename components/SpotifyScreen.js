@@ -28,7 +28,7 @@ export default class SpotifyScreen extends Component {
           console.log(`There was an error making the initial spoftify request`)
           })
       }
-    
+
   render() {
     var uri = this.state.url
     console.log(uri)
