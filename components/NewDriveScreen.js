@@ -129,7 +129,7 @@ export default class NewDriveScreen extends React.Component {
     destinationState, destinationZip, seatCount, seatCost, tripDetails
   ) {
     console.log('state before fetch', this.state);
-    fetch(`${DOMAIN}/`, {
+    fetch(`${DOMAIN}/postTrip`, {
       method:'POST',
       headers: {
         "Content-Type": "application/json"

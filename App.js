@@ -17,6 +17,7 @@ import SpecificTripScreen from './components/SpecificTripScreen.js'
 import PreviousTripsScreen from './components/PreviousTripsScreen.js'
 import ExploreTripsScreen from './components/ExploreTripsScreen.js'
 import PopularTripsScreen from './components/PopularTripsScreen.js'
+import ChatScreen from './components/ChatScreen.js'
 import PaymentScreen from './components/Payment.js'
 import {
   setCustomView,
@@ -274,6 +275,13 @@ export default StackNavigator({
   ExploreTrips: {
     screen: ExploreTripsScreen,
   },
+  ChatBox: {
+    screen: ChatScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+}, {initialRouteName: 'ChatBox'});
   Payment: {
     screen: PaymentScreen
   }
