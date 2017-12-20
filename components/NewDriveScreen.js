@@ -7,7 +7,6 @@ import Modal from 'react-native-modal';
 import styles from '../styles.js';
 import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
 
-
 export default class NewDriveScreen extends React.Component {
   constructor(props){
     super(props)
