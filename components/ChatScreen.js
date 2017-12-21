@@ -8,7 +8,7 @@ export default class Example extends React.Component {
     super(props);
     this.state = {
       _id: '',
-      'messages': [],
+      messages: [],
       name: '',
       text: '',
       createdAt: '',

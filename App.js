@@ -281,7 +281,6 @@ export default StackNavigator({
       header: null,
     },
   },
-}, {initialRouteName: 'ChatBox'});
   Payment: {
     screen: PaymentScreen
   }
