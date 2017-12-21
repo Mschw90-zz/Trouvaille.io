@@ -84,6 +84,7 @@ export default class UserFeedScreen extends React.Component {
           <Content style={{ display: 'flex', flex: 1}}>
           {
             this.state.userfeed.map((user, idx) => {
+              console.log(user);
               if (user.trips.length) {
                 var d = new Date(user.trips[0].date)
                 var driveMonth = (d.getMonth() + 1).toString();
@@ -97,8 +98,11 @@ export default class UserFeedScreen extends React.Component {
                     <Text style={{fontWeight: 'bold'}}>{user.first_name}</Text>
                     </View>
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                      <Text style={{fontWeight: 'bold'}}>Trip Discription: </Text>
-                      <Text>{user.trips[0].trip_details}</Text>
+                      <Text style={{fontWeight: 'bold'}}>Origin: </Text>
+                      <Text>{user.trips[0].departure_city}, {user.trips[0].departure_state}</Text>
+                      <Text style={{fontWeight: 'bold'}}>Destination: </Text>
+                      <Text>{user.trips[0].destination_city}, {user.trips[0].destination_state}</Text>
+
                     </View>
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                       <Text style={{fontWeight: 'bold'}}>Date of Trip: </Text>

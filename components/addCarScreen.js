@@ -115,7 +115,7 @@ export default class ProfileScreen extends React.Component {
       const file = {
         // `uri` can also be a file system path (i.e. file://)
         uri: pickerResult.uri,
-        name: "image.png",
+        name: Date.now(),
         type: "image/png"
       }
 
