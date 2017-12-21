@@ -35,6 +35,10 @@ export default class Sidebar extends Component {
     this.props.navigation.navigate('ChatBox')
   }
 
+  addCard= () => {
+    this.props.navigation.navigate('Payment2')
+  }
+
   logout = () => {
     fetch(`${DOMAIN}/logout`, {
       method: 'GET',
@@ -84,8 +88,6 @@ export default class Sidebar extends Component {
       /* do something with responseJson and go back to the Login view but
        * make sure to check for responseJson.success! */
        if(responseJson.success){
-           // return this.props.navigation.goBack();
-           console.log(responseJson);
           this.setState({image: responseJson.photo})
        }else{
            console.log('THERE WAS AN ERROR FINDING PICTURE', responseJson.error);
@@ -115,7 +117,6 @@ export default class Sidebar extends Component {
             <Button onPress={ () => this.popularTrips() } title='Popular Trips'></Button>
             <Button onPress={ () => this.settingPage() } title='Settings'></Button>
             <Button onPress={ () => this.Map() } title='Map'></Button>
-            <Button onPress={ () => this.payment() } title='Payment'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </View>
     );

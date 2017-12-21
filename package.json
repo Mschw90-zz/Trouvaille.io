@@ -6,6 +6,7 @@
     "native-base": "^2.3.5",
     "react": "^16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "react-native-awesome-card-io": "^0.7.0",
     "react-native-aws3": "0.0.8",
     "react-native-calendars": "^1.15.0",
     "react-native-easy-grid": "^0.1.15",
@@ -14,6 +15,7 @@
     "react-native-image-resizer": "^1.0.0",
     "react-native-linear-gradient": "^2.3.0",
     "react-native-maps": "^0.18.3",
+    "react-native-modal": "^4.1.1",
     "react-native-modal-datetime-picker": "^4.13.0",
     "react-navigation": "^1.0.0-beta.22"
   }
