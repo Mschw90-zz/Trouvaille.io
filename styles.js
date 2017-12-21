@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'flex-start',
     right: 33,
+    fontSize: 12
   },
   testTripDetailsRow2: {
     flex: 1,

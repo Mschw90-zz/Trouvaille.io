@@ -40,3 +40,37 @@ export default class NadaScreen extends React.Component {
         )
     }
 }
+
+
+<AddCard
+addCardHandler={() => this.pay()}
+// styles={{}} // Override default styles
+onCardNumberBlur={() => console.log('card number blurred')}
+onCardNumberFocus={() => console.log('card number focused')}
+onCvcFocus={() => console.log('cvc focused')}
+onCvcBlur={() => console.log('cvc blurred')}
+onExpiryFocus={() => console.log('expiry focused')}
+onExpiryBlur={() => console.log('expiry blurred')}
+onScanCardClose={() => console.log('scan card closed')}
+onScanCardOpen={() => console.log('scan card opened')}
+activityIndicatorColor="pink"
+addCardButtonText="Add Card"
+scanCardButtonText="Scan Card"
+scanCardAfterScanButtonText="Scan Card Again"
+scanCardVisible={true}
+placeholderTextColor="black"
+cardNumberPlaceholderText="4242 4242 4242 4242"
+expiryPlaceholderText="MM/YY"
+cvcPlaceholderText="CVC"
+cardNumberErrorMessage="Card Number is incorrect"
+expiryErrorMessage="Expiry is incorrect"
+cvcErrorMessage="CVC is incorrect"
+/>
+
+<StripeAddCard
+publicStripeKey= {{STRIPE_SK}}
+addCardTokenHandler={(stripeCardToken) => {
+  console.log(stripeCardToken)
+}}
+// {/* Other props from AddCard */ }
+/>
