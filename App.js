@@ -17,7 +17,7 @@ import SpecificTripScreen from './components/SpecificTripScreen.js'
 import PreviousTripsScreen from './components/PreviousTripsScreen.js'
 import ExploreTripsScreen from './components/ExploreTripsScreen.js'
 import PopularTripsScreen from './components/PopularTripsScreen.js'
-// import ChatScreen from './components/ChatScreen.js'
+import ChatScreen from './components/ChatScreen.js'
 import styles from './styles.js'
 
 //Login Page
@@ -238,7 +238,7 @@ export default StackNavigator({
     screen: ExploreTripsScreen,
   },
   ChatBox: {
-    screen: PopularTripsScreen,
+    screen: ChatScreen,
     navigationOptions: {
       header: null,
     },
