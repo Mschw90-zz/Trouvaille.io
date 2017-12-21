@@ -129,7 +129,7 @@ export default class NewDriveScreen extends React.Component {
     destinationState, destinationZip, seatCount, seatCost, tripDetails
   ) {
     console.log('state before fetch', this.state);
-    fetch(`${DOMAIN}/postTrip`, {
+    fetch(`${DOMAIN}/newTrip`, {
       method:'POST',
       headers: {
         "Content-Type": "application/json"
@@ -144,6 +144,7 @@ export default class NewDriveScreen extends React.Component {
         destinationZip: destinationZip,
         seatCount: seatCount,
         seatCost: seatCost,
+        tripDetails: tripDetails
       })
     })
     .then((response) => response.json())
@@ -197,21 +198,18 @@ export default class NewDriveScreen extends React.Component {
 
         <Label>Departure City</Label>
         <TextInput
-            value={this.state.firstName}
             style={styles.inputField2}
             onChangeText={(text) => this.setDepartureCity(text)}
         ></TextInput>
 
         <Label>Departure State</Label>
         <TextInput
-            value={this.state.lastName}
             style={styles.inputField2}
             onChangeText={(text) => this.setDepartureState(text)}
         ></TextInput>
 
         <Label>Departure Zipcode</Label>
         <TextInput
-            value={this.state.hometown}
             style={styles.inputField2}
             keyboardType = 'numeric'
             onChangeText={(text) => this.setDepartureZip(text)}
@@ -219,21 +217,18 @@ export default class NewDriveScreen extends React.Component {
 
         <Label>Destination City</Label>
         <TextInput
-            value={this.state.hometown}
             style={styles.inputField2}
             onChangeText={(text) => this.setDestinationCity(text)}
         ></TextInput>
 
         <Label>Destination State</Label>
         <TextInput
-            value={this.state.hometown}
             style={styles.inputField2}
             onChangeText={(text) => this.setDestinationState(text)}
         ></TextInput>
 
         <Label>Destination Zipcode</Label>
         <TextInput
-            value={this.state.hometown}
             style={styles.inputField2}
             keyboardType = 'numeric'
             onChangeText={(text) => this.setDestinationZip(text)}
@@ -242,14 +237,12 @@ export default class NewDriveScreen extends React.Component {
         <Label>Seats</Label>
         <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}>
           <TextInput
-              value={this.state.month}
               placeholder='#Seats'
               keyboardType = 'numeric'
               style={styles.inputField4}
               onChangeText={(text) => this.setSeatCount(text)}
           ></TextInput>
           <TextInput
-              value={this.state.day}
               placeholder='Seat Price'
               keyboardType = 'numeric'
               style={styles.inputField4}
@@ -259,7 +252,6 @@ export default class NewDriveScreen extends React.Component {
 
         <Label>Trip Details</Label>
         <TextInput
-            value={this.state.bio}
             multiline={true}
             numberOfLines={10}
             maxHeight={90}
@@ -267,7 +259,7 @@ export default class NewDriveScreen extends React.Component {
             onChangeText={(text) => this.setTripDetails(text)}
         ></TextInput>
 
-        <TouchableOpacity style={[styles.button, styles.buttonLightBlue]} onPress={ () => {this.submit(this.state.date, this.state.departureCity, this.state.departureState, this.state.departureZip, this.state.destinationCity, this.state.destinationState, this.state.destinationZip, this.state.seatCount, this.state.seatCost, this.state.tripDetails)}}>
+        <TouchableOpacity style={[styles.button, styles.buttonLightBlue]} onPress={ () => {this.submitTrip(this.state.date, this.state.departureCity, this.state.departureState, this.state.departureZip, this.state.destinationCity, this.state.destinationState, this.state.destinationZip, this.state.seatCount, this.state.seatCost, this.state.tripDetails)}}>
           <Text style={styles.buttonLabel}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
