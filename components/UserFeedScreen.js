@@ -40,11 +40,9 @@ export default class UserFeedScreen extends React.Component {
       method: 'GET',
     })
     .then((response) => {
-      console.log(response, '<<<<<<<');
       return response.json()
     })
     .then((responseJson) => {
-      console.log(responseJson, '>>>>>>>>>>');
       if (responseJson.success) {
         this.setState({trips: responseJson.trips})
       } else {
