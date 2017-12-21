@@ -198,18 +198,21 @@ export default class NewDriveScreen extends React.Component {
 
         <Label>Departure City</Label>
         <TextInput
+            placeholder='Departure City'
             style={styles.inputField2}
             onChangeText={(text) => this.setDepartureCity(text)}
         ></TextInput>
 
         <Label>Departure State</Label>
         <TextInput
+            placeholder='Departure State'
             style={styles.inputField2}
             onChangeText={(text) => this.setDepartureState(text)}
         ></TextInput>
 
         <Label>Departure Zipcode</Label>
         <TextInput
+            placeholder='Departure Zipcode'
             style={styles.inputField2}
             keyboardType = 'numeric'
             onChangeText={(text) => this.setDepartureZip(text)}
@@ -217,18 +220,21 @@ export default class NewDriveScreen extends React.Component {
 
         <Label>Destination City</Label>
         <TextInput
+            placeholder='Destination City'
             style={styles.inputField2}
             onChangeText={(text) => this.setDestinationCity(text)}
         ></TextInput>
 
         <Label>Destination State</Label>
         <TextInput
+            placeholder='Destination State'
             style={styles.inputField2}
             onChangeText={(text) => this.setDestinationState(text)}
         ></TextInput>
 
         <Label>Destination Zipcode</Label>
         <TextInput
+            placeholder='Destination Zipcode'
             style={styles.inputField2}
             keyboardType = 'numeric'
             onChangeText={(text) => this.setDestinationZip(text)}
@@ -250,8 +256,9 @@ export default class NewDriveScreen extends React.Component {
           ></TextInput>
         </View>
 
-        <Label>Trip Details</Label>
+        <Label>Reason for Trip</Label>
         <TextInput
+            placeholder='Tell use why you are going on this trip :)'
             multiline={true}
             numberOfLines={10}
             maxHeight={90}

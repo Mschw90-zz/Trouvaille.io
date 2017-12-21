@@ -47,7 +47,7 @@ export default class ProfileScreen extends React.Component {
             firstName: responseJson.first_name,
             lastName: responseJson.last_name,
             month: (d.getMonth() + 1).toString(),
-            day: (d.getDay()).toString(),
+            day: (d.getDate()).toString(),
             year: (d.getFullYear()).toString(),
             hometown: responseJson.hometown,
             bio: responseJson.bio

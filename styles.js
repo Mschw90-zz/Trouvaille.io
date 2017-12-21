@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    left: 33
   },
   drawer: {
     width: 200,
@@ -158,21 +157,18 @@ const styles = StyleSheet.create({
     marginTop: 50
   },
   testTrip: {
-    height: 75,
+    // height: ,
     backgroundColor: 'dodgerblue',
     borderWidth: 1,
     borderColor: 'black'
   },
   testTripDetailsRow: {
     alignItems: 'center',
-    justifyContent: 'center',
     flex: 1,
-    left: 75
   },
   testTripDetails: {
     fontWeight: 'bold',
     alignSelf: 'flex-start',
-    right: 33,
     fontSize: 12
   },
   testTripDetailsRow2: {
@@ -183,7 +179,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     flex: 1,
     justifyContent: 'flex-end',
-    right: 50,
     fontSize: 12
   },
   testTripSeats: {
