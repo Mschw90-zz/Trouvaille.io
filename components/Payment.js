@@ -53,7 +53,6 @@ export default class Payment extends React.Component {
   render() {
    return (
      <View>
-      <Text> Hello </Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View>
         <TextInput
@@ -78,7 +77,7 @@ export default class Payment extends React.Component {
             secureTextEntry={true}
             onChangeText={(text) => this.setCVC(text)}
         ></TextInput>
-        <View style={{flex: 1, justifyContent: 'center', width: Dimensions.get('window').width}}>
+        <View style={{flex: 1, maringTop: 2, justifyContent: 'center', width: Dimensions.get('window').width}}>
           <TouchableOpacity style={[styles.button, styles.buttonRed]} onPress={ () => {this.pay()} }>
           <Text style={styles.buttonLabel}>Tap to Pay</Text>
           </TouchableOpacity>

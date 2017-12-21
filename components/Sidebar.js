@@ -35,6 +35,10 @@ export default class Sidebar extends Component {
     this.props.navigation.navigate('ChatBox')
   }
 
+  addCard= () => {
+    this.props.navigation.navigate('Payment2')
+  }
+
   logout = () => {
     fetch(`${DOMAIN}/logout`, {
       method: 'GET',
@@ -116,6 +120,7 @@ export default class Sidebar extends Component {
             <Button onPress={ () => this.settingPage() } title='Settings'></Button>
             <Button onPress={ () => this.Map() } title='Map'></Button>
             <Button onPress={ () => this.payment() } title='Payment'></Button>
+            <Button onPress={ () => this.addCard() } title='Add a card'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </View>
     );
