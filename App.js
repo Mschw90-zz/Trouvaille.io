@@ -20,7 +20,6 @@ import PopularTripsScreen from './components/PopularTripsScreen.js'
 import ChatScreen from './components/ChatScreen.js'
 import PaymentScreen from './components/Payment.js'
 import Payment2 from './components/Payment2.js'
-
 import {
   setCustomView,
   setCustomTextInput,
@@ -29,6 +28,8 @@ import {
   setCustomTouchableOpacity
 } from 'react-native-global-props';
 import styles from './styles.js'
+
+console.disableYellowBox = true;
 
 const customTextInputProps = {
   underlineColorAndroid: 'rgba(0,0,0,0)',
