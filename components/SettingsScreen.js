@@ -22,6 +22,14 @@ export default class SettingsScreen extends React.Component {
     //   this.props.navigation.navigate('HoldingSpot');
     // }
 
+    addCard = () => {
+      this.props.navigation.navigate('Payment')
+    }
+
+    viewCards = () => {
+      this.props.navigation.navigate('Payment2')
+    }
+
     connectFacebook = async () => {
         try {
           const { type, token } = await Facebook.logInWithReadPermissionsAsync(
@@ -87,6 +95,14 @@ export default class SettingsScreen extends React.Component {
           source={require('../assets/facebookLogo.png')}
           />
           <Text style={styles.buttonLabel}>Connect to your Facebook account</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.addCard.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
+          <Text style={styles.buttonLabel}>Add a card</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.viewCards.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
+          <Text style={styles.buttonLabel}>View your payment options</Text>
         </TouchableOpacity>
 
       </LinearGradient>

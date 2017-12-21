@@ -37,14 +37,9 @@ export default class NewDriveScreen extends React.Component {
   setTripDate(day) {
 
     //since no redux do we need to post it to server in function here?
-    console.log('day', day);
-    console.log('day.date', day.dateString);
     let update = Object.assign({}, this.state, {date: day.dateString})
-    console.log('update!!', update);
       this._hideModal();
       this.setState(update)
-      console.log('state state state here ', this.state);
-
     }
 
 
@@ -128,7 +123,6 @@ export default class NewDriveScreen extends React.Component {
   submitTrip( date, departureCity, departureState, departureZip, destinationCity,
     destinationState, destinationZip, seatCount, seatCost, tripDetails
   ) {
-    console.log('state before fetch', this.state);
     fetch(`${DOMAIN}/newTrip`, {
       method:'POST',
       headers: {
