@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "trouvaille",
+    "description": "An empty new project",
+    "slug": "trouvaille",
+    "privacy": "public",
+    "sdkVersion": "23.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/carTrip.gif",
+      "resizeMode": "contain",
+      "backgroundColor": "#5DADE2"
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

@@ -1,0 +1,5 @@
+.expo/*
+npm-debug.*
+env.sh
+env.js
+.DS_Store
