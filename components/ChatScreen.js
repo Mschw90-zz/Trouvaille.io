@@ -8,7 +8,7 @@ export default class Example extends React.Component {
     super(props);
     this.state = {
       _id: '',
-      'messages': [],
+      messages: [],
       name: '',
       text: '',
       createdAt: '',
@@ -24,10 +24,10 @@ export default class Example extends React.Component {
     // this.renderCustomActions = this.renderCustomActions.bind(this);
     this.renderBubble = this.renderBubble.bind(this);
     // this.renderSystemMessage = this.renderSystemMessage.bind(this);
-    // this.renderFooter = this.renderFooter.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
     //
-    // this._isAlright = null;
+    this._isAlright = null;
   }
 
 
@@ -47,11 +47,13 @@ export default class Example extends React.Component {
 
   onLoadEarlier() {
     this.setState((previousState) => {
+      console.log('previous state', previousState);
       return {
         isLoadingEarlier: true,
       };
     });
 
+    //fetch call to server. get all messages in this trip.
     setTimeout(() => {
       if (this._isMounted === true) {
         this.setState((previousState) => {
@@ -66,6 +68,7 @@ export default class Example extends React.Component {
   }
 
   onReceive(text) {
+    console.log('on receive outside of return', text);
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, {
@@ -74,7 +77,7 @@ export default class Example extends React.Component {
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'React Native',
+            name: 'Tyrone Scafe',
             // avatar: 'https://facebook.github.io/react/img/logo_og.png',
           },
         }),
@@ -88,17 +91,21 @@ export default class Example extends React.Component {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
+    console.log('on Send', messages);
 
     // for demo purpose
     this.answerDemo(messages);
   }
 
+  // need to figure out how to work sockets receiving input and
+  // translating that to a {friend name} is typing... string
+  // maybe a function that says onSocketNotification
   answerDemo(messages) {
     if (messages.length > 0) {
       if ((messages[0].image || messages[0].location) || !this._isAlright) {
         this.setState((previousState) => {
           return {
-            typingText: 'React Native is typing'
+            typingText: 'Tyrone is typing...'
           };
         });
       }
@@ -114,7 +121,8 @@ export default class Example extends React.Component {
           } else {
             if (!this._isAlright) {
               this._isAlright = true;
-              this.onReceive('Alright');
+              this.onReceive("Yeah, I'm on the way to Matt rn");
+              console.log('reply', messages);
             }
           }
         }
@@ -125,7 +133,7 @@ export default class Example extends React.Component {
           typingText: null,
         };
       });
-    }, 1000);
+    }, 5000);
   }
 
   renderBubble(props) {
@@ -134,7 +142,7 @@ export default class Example extends React.Component {
         {...props}
         wrapperStyle={{
           left: {
-            backgroundColor: '#f0f0f0',
+            backgroundColor: 'pink',
           }
         }}
       />
@@ -142,13 +150,16 @@ export default class Example extends React.Component {
   }
 
   renderFooter(props) {
-    return (
-      <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>
-          {/* {this.state.typingText} */} typing text area...?
-        </Text>
-      </View>
-    );
+    if (this.state.typingText !== null) {
+      return (
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerText}>
+            {this.state.typingText}
+          </Text>
+        </View>
+      );
+    }
+    return null;
   }
 
   render() {
@@ -160,14 +171,14 @@ export default class Example extends React.Component {
             onLoadEarlier={this.onLoadEarlier}
             isLoadingEarlier={this.state.isLoadingEarlier}
 
-            placeholder={'Type a message, bro!!!'}
+            placeholder={'Type a message...'}
 
             user={{
               _id: 1,
             }}
 
             renderFooter={this.renderFooter}
-            renderBubble={this.renderBubble}
+            // renderBubble={this.renderBubble}
           />
 
     );
@@ -177,7 +188,6 @@ export default class Example extends React.Component {
 
 const styles = StyleSheet.create({
   footerContainer: {
-    backgroundColor: 'dodgerblue',
     marginTop: 5,
     marginLeft: 10,
     marginRight: 10,

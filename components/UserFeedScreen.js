@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, ListView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Drawer, Header, Title, Button, Left, Right, Body, Icon, Content } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -15,7 +15,7 @@ export default class UserFeedScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trips: [],
+
     }
   }
 
@@ -36,13 +36,15 @@ export default class UserFeedScreen extends React.Component {
   }
 
   componentWillMount() {
-    fetch(`${DOMAIN}/`, {
+    fetch(`${DOMAIN}/getUserFeed`, {
       method: 'GET',
     })
     .then((response) => {
+      console.log(response, '<<<<<<<');
       return response.json()
     })
     .then((responseJson) => {
+      console.log(responseJson, '>>>>>>>>>>');
       if (responseJson.success) {
         this.setState({trips: responseJson.trips})
       } else {
@@ -82,7 +84,7 @@ export default class UserFeedScreen extends React.Component {
           </Header>
           <Content style={{ display: 'flex'}}>
             <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
               <Row style={styles.testTripDetailsRow}>
                 <Text style={styles.testTripDetails}>Tyrone is going to: Coachella Roadtrip</Text>
               </Row>
@@ -92,7 +94,7 @@ export default class UserFeedScreen extends React.Component {
               </Row>
             </Row>
             <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
               <Row style={styles.testTripDetailsRow}>
                 <Text style={styles.testTripDetails}>Matt Schwartz is going to: LA Drive</Text>
               </Row>
@@ -102,9 +104,9 @@ export default class UserFeedScreen extends React.Component {
               </Row>
             </Row>
             <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={{ uri: 'http://bit.ly/2B09H9I' }} />
+              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
               <Row style={styles.testTripDetailsRow}>
-                <Text style={styles.testTripDetails}>Alex Glaze is going to: Yosemite Camping</Text>
+              <Text style={styles.testTripDetails}>Alex Glaze is going to: Yosemite Camping</Text>
               </Row>
               <Row style={styles.testTripDetailsRow2}>
                 <Text style={styles.testTripDate}>March 3rd, 2018</Text>

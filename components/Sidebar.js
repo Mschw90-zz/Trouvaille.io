@@ -23,6 +23,13 @@ export default class Sidebar extends Component {
   exploreTrips = () => {
     this.props.navigation.navigate('ExploreTrips')
   }
+  map = () => {
+    this.props.navigation.navigate('Map')
+  }
+
+  payment(){
+    this.props.navigation.navigate('Payment')
+  }
 
   chat = () => {
     this.props.navigation.navigate('ChatBox')
@@ -107,6 +114,8 @@ export default class Sidebar extends Component {
             <Button onPress={ () => this.previousTrips() } title='Previous Trips'></Button>
             <Button onPress={ () => this.popularTrips() } title='Popular Trips'></Button>
             <Button onPress={ () => this.settingPage() } title='Settings'></Button>
+            <Button onPress={ () => this.Map() } title='Map'></Button>
+            <Button onPress={ () => this.payment() } title='Payment'></Button>
             <Button onPress={ () => this.logout() } title='Logout'></Button>
           </View>
     );

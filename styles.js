@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'flex-start',
     right: 33,
+    fontSize: 12
   },
   testTripDetailsRow2: {
     flex: 1,
@@ -290,7 +291,14 @@ const styles = StyleSheet.create({
   newPassengerIcon: {
     color: 'white',
     fontSize: 90
-  }
+  },
+  chatButton: {
+    borderRadius: 10,
+    justifyContent: 'center',
+    backgroundColor: '#5cbbf1',
+    width: Dimensions.get('window').width / 3,
+    height: Dimensions.get('window').height / 21
+  },
 });
 
 module.exports = styles;
