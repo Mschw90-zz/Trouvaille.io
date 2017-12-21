@@ -45,7 +45,16 @@ export default class UserFeedScreen extends React.Component {
     })
     .then((responseJson) => {
       if (responseJson.length) {
+        console.log('response json', responseJson);
         this.setState({userfeed: responseJson})
+        //userfeed:
+        // {
+        //   departure_city: blah,
+        //   ....
+        //   user: {
+        //     user info
+        //   }
+        // }
       } else {
         console.log('There was an error finding your trip feed', responseJson.error);
       }
@@ -83,38 +92,37 @@ export default class UserFeedScreen extends React.Component {
           </Header>
           <Content style={{ display: 'flex', flex: 1}}>
           {
-            this.state.userfeed.map((user, idx) => {
-              console.log(user);
-              if (user.trips.length) {
-                var d = new Date(user.trips[0].date)
-                var driveMonth = (d.getMonth() + 1).toString();
-                var driveDay = (d.getDate()).toString();
-                var driveYear = (d.getFullYear()).toString();
+            this.state.userfeed.map((trip, idx) => {
+              console.log(trip);
 
-                return (
-                  <Row id={user.id} onPress={() => {this.specificTripPage()}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <Image style={styles.circularProfPic} source={{ uri: user.profile_URL }} />
-                    <Text style={{fontWeight: 'bold'}}>{user.first_name}</Text>
-                    </View>
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                      <Text style={{fontWeight: 'bold'}}>Origin: </Text>
-                      <Text>{user.trips[0].departure_city}, {user.trips[0].departure_state}</Text>
-                      <Text style={{fontWeight: 'bold'}}>Destination: </Text>
-                      <Text>{user.trips[0].destination_city}, {user.trips[0].destination_state}</Text>
+              var d = new Date(trip.date)
+              var driveMonth = (d.getMonth() + 1).toString();
+              var driveDay = (d.getDate()).toString();
+              var driveYear = (d.getFullYear()).toString();
 
+              return (
+                <Row id={trip.id} onPress={() => {this.specificTripPage()}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
+                  <View style={{flex: .5, alignItems: 'center', justifyContent: 'center'}}>
+                  <Image style={styles.circularProfPic} source={{ uri: trip.user.profile_URL }} />
+                  <Text style={{fontWeight: 'bold'}}>{trip.user.first_name}</Text>
+                  </View>
+                  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{fontWeight: 'bold'}}>Origin: </Text>
+                    <Text style={{fontSize: 15}}>{trip.departure_city}, {trip.departure_state}</Text>
+                    <Text style={{fontWeight: 'bold'}}>Destination: </Text>
+                    <Text style={{fontSize: 15}}>{trip.destination_city}, {trip.destination_state}</Text>
+
+                  </View>
+                  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{fontWeight: 'bold'}}>Date of Trip: </Text>
+                    <Text style={{fontSize: 15}}>{driveMonth}/{driveDay}/{driveYear}</Text>
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
+                      <Text style={{fontWeight: 'bold'}}>Seats Left: </Text>
+                      <Text style={{fontSize: 15}}>{trip.remaining_seats}</Text>
                     </View>
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                      <Text style={{fontWeight: 'bold'}}>Date of Trip: </Text>
-                      <Text>{driveMonth}/{driveDay}/{driveYear}</Text>
-                      <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontWeight: 'bold'}}>Seats Left: </Text>
-                        <Text>{user.trips[0].remaining_seats}</Text>
-                      </View>
-                    </View>
-                  </Row>
-                )
-              }
+                  </View>
+                </Row>
+              )
             })
           }
           </Content>
