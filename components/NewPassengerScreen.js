@@ -26,7 +26,7 @@ export default class NewPassengerScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'New Driver'
+    title: 'New Passenger'
   };
 
   _showModal = () => this.setState({ isModalVisible: true })

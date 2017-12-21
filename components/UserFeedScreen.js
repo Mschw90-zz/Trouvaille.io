@@ -15,7 +15,8 @@ export default class UserFeedScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      userfeed: [],
+      background: ['#92FB7A','#3A69F6', '#EB4CC7', '#8A29F5', '#EB3323', 'aqua', 'fuchsia', 'lime', 'navy', 'olive', 'orange', 'red', 'silver', 'teal', 'yellow']
     }
   }
 
@@ -43,8 +44,8 @@ export default class UserFeedScreen extends React.Component {
       return response.json()
     })
     .then((responseJson) => {
-      if (responseJson.success) {
-        this.setState({trips: responseJson.trips})
+      if (responseJson.length) {
+        this.setState({userfeed: responseJson})
       } else {
         console.log('There was an error finding your trip feed', responseJson.error);
       }
@@ -64,8 +65,8 @@ export default class UserFeedScreen extends React.Component {
         onClose={() => this.closeDrawer()}
       >
 
-        <Container>
-          <Header>
+        <Container style={{backgroundColor: '#E0E3ED'}}>
+          <Header style={{marginBottom: 10}}>
             <Left>
               <Button transparent>
                 <Icon name='ios-person' onPress={() => {this.openDrawer()}}/>
@@ -80,37 +81,38 @@ export default class UserFeedScreen extends React.Component {
               </Button>
             </Right>
           </Header>
-          <Content style={{ display: 'flex'}}>
-            <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
-              <Row style={styles.testTripDetailsRow}>
-                <Text style={styles.testTripDetails}>Tyrone is going to: Coachella Roadtrip</Text>
-              </Row>
-              <Row style={styles.testTripDetailsRow2}>
-                <Text style={styles.testTripDate}>Dec 25th, 2017</Text>
-                <Text style={styles.testTripSeats}>2 seats left</Text>
-              </Row>
-            </Row>
-            <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
-              <Row style={styles.testTripDetailsRow}>
-                <Text style={styles.testTripDetails}>Matt Schwartz is going to: LA Drive</Text>
-              </Row>
-              <Row style={styles.testTripDetailsRow2}>
-                <Text style={styles.testTripDate}>Jan. 1st, 2018</Text>
-                <Text style={styles.testTripSeats}>0 seats left</Text>
-              </Row>
-            </Row>
-            <Row onPress={() => {this.specificTripPage()}} style={styles.testTrip}>
-              <Image style={styles.circularProfPic} source={require('../assets/ssg2.jpg')} />
-              <Row style={styles.testTripDetailsRow}>
-              <Text style={styles.testTripDetails}>Alex Glaze is going to: Yosemite Camping</Text>
-              </Row>
-              <Row style={styles.testTripDetailsRow2}>
-                <Text style={styles.testTripDate}>March 3rd, 2018</Text>
-                <Text style={styles.testTripSeats}>1 seats left</Text>
-              </Row>
-            </Row>
+          <Content style={{ display: 'flex', flex: 1}}>
+          {
+            this.state.userfeed.map((user, idx) => {
+              if (user.trips.length) {
+                var d = new Date(user.trips[0].date)
+                var driveMonth = (d.getMonth() + 1).toString();
+                var driveDay = (d.getDate()).toString();
+                var driveYear = (d.getFullYear()).toString();
+
+                return (
+                  <Row id={user.id} onPress={() => {this.specificTripPage()}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <Image style={styles.circularProfPic} source={{ uri: user.profile_URL }} />
+                    <Text style={{fontWeight: 'bold'}}>{user.first_name}</Text>
+                    </View>
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                      <Text style={{fontWeight: 'bold'}}>Trip Discription: </Text>
+                      <Text>{user.trips[0].trip_details}</Text>
+                    </View>
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                      <Text style={{fontWeight: 'bold'}}>Date of Trip: </Text>
+                      <Text>{driveMonth}/{driveDay}/{driveYear}</Text>
+                      <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{fontWeight: 'bold'}}>Seats Left: </Text>
+                        <Text>{user.trips[0].remaining_seats}</Text>
+                      </View>
+                    </View>
+                  </Row>
+                )
+              }
+            })
+          }
           </Content>
         </Container>
       </Drawer>
