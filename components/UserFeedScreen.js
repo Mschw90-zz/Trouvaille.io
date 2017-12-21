@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert, AsyncStorage, ListView } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, WebView, Linking, TextInput, Alert, AsyncStorage, ListView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Drawer, Header, Title, Button, Left, Right, Body, Icon, Content } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -85,14 +85,14 @@ export default class UserFeedScreen extends React.Component {
           {
             this.state.userfeed.map((user, idx) => {
               console.log(user);
-              if (user.trips.length) {
+              if (false && user.trips.length) {
                 var d = new Date(user.trips[0].date)
                 var driveMonth = (d.getMonth() + 1).toString();
                 var driveDay = (d.getDate()).toString();
                 var driveYear = (d.getFullYear()).toString();
-
+                var uri = user.trips[0].fun_trip_url
                 return (
-                  <Row id={user.id} onPress={() => {this.specificTripPage()}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
+                  <Row key={user.id} id={user.id} onPress={() => {this.specificTripPage()}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <Image style={styles.circularProfPic} source={{ uri: user.profile_URL }} />
                     <Text style={{fontWeight: 'bold'}}>{user.first_name}</Text>
@@ -111,6 +111,18 @@ export default class UserFeedScreen extends React.Component {
                         <Text style={{fontWeight: 'bold'}}>Seats Left: </Text>
                         <Text>{user.trips[0].remaining_seats}</Text>
                       </View>
+                    </View>
+                    <View>
+                      <WebView
+                        ref={(ref) => { this.webview = ref; }}
+                        source={{ uri  }}
+                        onNavigationStateChange={(event) => {
+                          if (event.url !== uri) {
+                            this.webview.stopLoading();
+                            Linking.openURL(event.url);
+                          }
+                        }}
+                        />
                     </View>
                   </Row>
                 )
