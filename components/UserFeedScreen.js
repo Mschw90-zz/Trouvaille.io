@@ -19,33 +19,6 @@ export default class UserFeedScreen extends React.Component {
     }
   }
 
-  // getFeed() {
-  //     fetch(`${DOMAIN}/getUserFeed`, {
-  //       method: 'GET'
-  //     })
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //        if(responseJson.success){
-  //           const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-  //           this.setState({refreshing: false, dataSource: ds.cloneWithRows(responseJson)});
-  //        }else{
-  //            alert(responseJson.error);
-  //            console.log('error in get messages', responseJson.error);
-  //        }
-  //     })
-  //     .catch((err) => {
-  //         console.log('caught error in catch of get messages', err);
-  //     });
-  // }
-  //
-  // _onRefresh() {
-  //     console.log('ON REFRESH CALLED');
-  //     this.setState({refreshing: true});
-  //     this.getFeed();
-  // }
-
-
-
   newTripPage() {
     this.props.navigation.navigate('NewTrip')
   }
