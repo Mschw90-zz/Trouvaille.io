@@ -23,7 +23,7 @@ export default class Payment extends React.Component {
     .then((responseJson) => {
       if (responseJson.success) {
         console.log(responseJson.cards)
-        responseJson.forEach(function(cc)=>{
+        responseJson.forEach((cc)=>{
           cards.push(cc)
         })
         console.log(cards)
