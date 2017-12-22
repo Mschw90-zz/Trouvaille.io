@@ -78,7 +78,7 @@ export default class UserFeedScreen extends React.Component {
               </Button>
             </Left>
             <Body>
-              <Title>User Feed!</Title>
+              <Title>User Feed</Title>
             </Body>
             <Right>
               <Button transparent>
@@ -89,8 +89,6 @@ export default class UserFeedScreen extends React.Component {
           <Content style={{ display: 'flex', flex: 1}}>
           {
             this.state.userfeed.map((trip, idx) => {
-              console.log(trip);
-
               var d = new Date(trip.date)
               var driveMonth = (d.getMonth() + 1).toString();
               var driveDay = (d.getDate()).toString();

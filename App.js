@@ -21,6 +21,7 @@ import ChatScreen from './components/ChatScreen.js'
 import PaymentScreen from './components/Payment.js'
 import Payment2 from './components/Payment2.js'
 import FunScreen from './components/Fun.js'
+import Checkout1 from './components/Checkout1.js'
 
 import {
   setCustomView,
@@ -31,7 +32,7 @@ import {
 } from 'react-native-global-props';
 import styles from './styles.js'
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const customTextInputProps = {
   underlineColorAndroid: 'rgba(0,0,0,0)',
@@ -294,5 +295,8 @@ export default StackNavigator({
   },
   Fun: {
     screen: FunScreen
+  },
+  CheckoutConfirm: {
+    screen: Checkout1
   }
 }, {initialRouteName: 'Login'});
