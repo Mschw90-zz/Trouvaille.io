@@ -28,7 +28,7 @@ export default class DateSelectCalendar extends React.Component {
         <Calendar style={styles.calendar}
           onDayPress={(day) => {this.onChangeDay(day)}}
         />
-        <Text style={{color: 'pink'}}>The date is: {this.state.date} </Text>
+        {/* <Text style={{color: 'pink'}}>The date is: {this.state.date} </Text> */}
       </View>
     )
   }
