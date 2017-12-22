@@ -102,7 +102,7 @@ export default class SettingsScreen extends React.Component {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.viewCards.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
-          <Text style={styles.buttonLabel}>View your payment options</Text>
+          <Text style={styles.buttonLabel}>View account payment options</Text>
         </TouchableOpacity>
 
       </LinearGradient>

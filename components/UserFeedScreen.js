@@ -16,6 +16,7 @@ export default class UserFeedScreen extends React.Component {
     super(props);
     this.state = {
       userfeed: [],
+      tripStuff: {},
       background: ['#92FB7A','#3A69F6', '#EB4CC7', '#8A29F5', '#EB3323', 'aqua', 'fuchsia', 'lime', 'navy', 'olive', 'orange', 'red', 'silver', 'teal', 'yellow']
     }
   }
@@ -24,8 +25,11 @@ export default class UserFeedScreen extends React.Component {
     this.props.navigation.navigate('NewTrip')
   }
 
-  specificTripPage() {
-    this.props.navigation.navigate('SpecificTrip')
+  specificTripPage(tripInfo) {
+    this.setState({
+      tripStuff: tripInfo
+    })
+    this.props.navigation.navigate('SpecificTrip', {trip: tripInfo})
   }
 
   closeDrawer = () => {
@@ -45,16 +49,7 @@ export default class UserFeedScreen extends React.Component {
     })
     .then((responseJson) => {
       if (responseJson.length) {
-        console.log('response json', responseJson);
         this.setState({userfeed: responseJson})
-        //userfeed:
-        // {
-        //   departure_city: blah,
-        //   ....
-        //   user: {
-        //     user info
-        //   }
-        // }
       } else {
         console.log('There was an error finding your trip feed', responseJson.error);
       }
@@ -101,7 +96,7 @@ export default class UserFeedScreen extends React.Component {
               var driveYear = (d.getFullYear()).toString();
 
               return (
-                <Row id={trip.id} onPress={() => {this.specificTripPage()}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
+                <Row key={trip.id} id={trip.id} onPress={() => {this.specificTripPage(trip)}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
                   <View style={{flex: .5, alignItems: 'center', justifyContent: 'center'}}>
                   <Image style={styles.circularProfPic} source={{ uri: trip.user.profile_URL }} />
                   <Text style={{fontWeight: 'bold'}}>{trip.user.first_name}</Text>
