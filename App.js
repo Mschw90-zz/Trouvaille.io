@@ -20,6 +20,8 @@ import PopularTripsScreen from './components/PopularTripsScreen.js'
 import ChatScreen from './components/ChatScreen.js'
 import PaymentScreen from './components/Payment.js'
 import Payment2 from './components/Payment2.js'
+import FunScreen from './components/Fun.js'
+
 import {
   setCustomView,
   setCustomTextInput,
@@ -289,5 +291,8 @@ export default StackNavigator({
   },
   Payment2: {
     screen: Payment2
+  },
+  Fun: {
+    screen: FunScreen
   }
 }, {initialRouteName: 'Login'});

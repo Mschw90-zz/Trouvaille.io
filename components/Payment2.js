@@ -9,7 +9,12 @@ export default class Payment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      allYourCards: []
     }
+  }
+
+  viewCard(){
+    console.log(`You got me`)
   }
 
   componentDidMount(){
@@ -23,10 +28,9 @@ export default class Payment extends React.Component {
     .then((responseJson) => {
       if (responseJson.success) {
         console.log(responseJson.cards)
-        responseJson.forEach((cc)=>{
-          cards.push(cc)
+        this.setState({
+          allYourCards: responseJson.cards
         })
-        console.log(cards)
       } else {
         console.log('There was an error finding your trip feed', responseJson.error);
       }
@@ -37,9 +41,14 @@ export default class Payment extends React.Component {
   }
 
   render()  {
+    console.log(this.state.allYourCards)
         return (
           <View>
-         <Text>Card Page</Text>
+        {this.state.allYourCards.map(card =>{
+          return(<TouchableOpacity key={card.stripeLast4} onPress={this.viewCard.bind(this)} style={[styles.spotifyButton, styles.buttonRed]}>
+          <Text style={styles.buttonLabel}>Delete: {card.stripeLast4}</Text>
+        </TouchableOpacity>)
+        })}
           </View>
         )
     }
