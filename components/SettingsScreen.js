@@ -88,7 +88,7 @@ export default class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <LinearGradient colors={['#833ab4', '#fd1d1d', '#fcb045']} style={styles.background}>
+      <LinearGradient colors={['#833ab4', '#fd1d1d', '#fcb045']} style={{flex: 1, justifyContent: "center", alignItems: 'center'}}>
         <TouchableOpacity onPress={this.connectFacebook.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
           <Image
           style={{width:30, height: 30, marginRight: 15}}
@@ -97,14 +97,31 @@ export default class SettingsScreen extends React.Component {
           <Text style={styles.buttonLabel}>Connect to your Facebook account</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.addCard.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
+        <TouchableOpacity onPress={this.addCard.bind(this)}
+        style={{alignSelf: 'stretch',
+          paddingTop: 10,
+          paddingBottom: 10,
+          marginTop: 50,
+          marginLeft: 5,
+          marginRight: 5,
+          borderRadius: 5,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          backgroundColor: '#39824A'
+        }}>
+        <View style={{marginRight: 80, marginLeft: 60}}>
+          <Image
+            style={{width:30, height: 30}}
+            source={require('../assets/cards.png')}
+          />
+        </View>
+
           <Text style={styles.buttonLabel}>Add a card</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.viewCards.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
+        <TouchableOpacity onPress={this.viewCards.bind(this)} style={[styles.spotifyButton, styles.buttonPurple]}>
           <Text style={styles.buttonLabel}>View account payment options</Text>
         </TouchableOpacity>
-
       </LinearGradient>
     );
   }
