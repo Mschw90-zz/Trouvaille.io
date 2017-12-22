@@ -92,10 +92,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   spotifyButton: {
+
     alignSelf: 'stretch',
     paddingTop: 10,
     paddingBottom: 10,
-    marginTop: 10,
+    marginTop: 50,
     marginLeft: 5,
     marginRight: 5,
     borderRadius: 5,
@@ -108,6 +109,9 @@ const styles = StyleSheet.create({
   buttonRed: {
     backgroundColor: '#FF585B',
   },
+  buttonPurple: {
+    backgroundColor: '#841C77',
+  },
   buttonBlue: {
     backgroundColor: '#667AA9',
   },
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFDF00'
   },
   buttonLightBlue: {
-    backgroundColor: '#95CDF6'
+    backgroundColor: '#CB3066'
   },
   buttonLabel: {
     textAlign: 'center',
@@ -195,7 +199,8 @@ const styles = StyleSheet.create({
   sidebarProfPic: {
     width:75,
     height: 75,
-    marginTop: 25
+    marginTop: 25,
+    borderRadius: 25
   },
   centerView: {
     alignItems: 'center'

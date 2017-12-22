@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Image, View, TextInput, ScrollView, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
-import { ImagePicker } from 'expo';
+import { ImagePicker, LinearGradient } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import styles from '../styles.js';
 import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
@@ -208,9 +208,10 @@ export default class ProfileScreen extends React.Component {
 
   render() {
     return (
+      <LinearGradient colors={['#ef32d9', '#89fffd']} style={{height: Dimensions.get('window').height}}>
       <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
-        {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} /> : null}
+        {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 180, height: 180, borderRadius: 25 }} /> : null}
         <TouchableOpacity onPress={this._takePhoto}>
           <Image
           style={{width:50, height: 50}}
@@ -218,7 +219,6 @@ export default class ProfileScreen extends React.Component {
           />
         </TouchableOpacity>
 
-        <Label>License Plate</Label>
         <TextInput
             value={this.state.licensePlate}
             placeholder='License Plate'
@@ -226,7 +226,6 @@ export default class ProfileScreen extends React.Component {
             onChangeText={(text) => this.setLicensePlate(text)}
         ></TextInput>
 
-        <Label>Color</Label>
         <TextInput
             value={this.state.color}
             placeholder='Color'
@@ -234,7 +233,6 @@ export default class ProfileScreen extends React.Component {
             onChangeText={(text) => this.setColor(text)}
         ></TextInput>
 
-        <Label>Make</Label>
         <TextInput
             value={this.state.make}
             placeholder='Make'
@@ -242,7 +240,6 @@ export default class ProfileScreen extends React.Component {
             onChangeText={(text) => this.setMake(text)}
         ></TextInput>
 
-        <Label>Model</Label>
         <TextInput
             value={this.state.model}
             placeholder='Model'
@@ -250,7 +247,6 @@ export default class ProfileScreen extends React.Component {
             onChangeText={(text) => this.setModel(text)}
         ></TextInput>
 
-        <Label>Year</Label>
         <TextInput
             value={this.state.year}
             placeholder='YYYY'
@@ -266,6 +262,7 @@ export default class ProfileScreen extends React.Component {
 
       </KeyboardAvoidingView>
       </ScrollView>
+      </LinearGradient>
     );
   }
 
