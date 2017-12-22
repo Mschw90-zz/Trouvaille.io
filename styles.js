@@ -130,6 +130,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  buttonLabel2: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: 'blue',
+    fontWeight: 'bold',
+  },
   appleLabel: {
     textAlign: 'center',
     fontSize: 16,

@@ -111,7 +111,7 @@ export default class Sidebar extends Component {
               source={{ uri: this.state.image }}
             />
             <Button onPress={ () => this.profileScreen() } title='Profile'></Button>
-            <Button onPress={ () => this.chat() } title='Chat'></Button>
+            <Button onPress={ () => this.chat() } title='Notifications'></Button>
             <Button onPress={ () => this.exploreTrips() } title='Explore Local Trips'></Button>
             <Button onPress={ () => this.previousTrips() } title='Previous Trips'></Button>
             <Button onPress={ () => this.popularTrips() } title='Popular Trips'></Button>

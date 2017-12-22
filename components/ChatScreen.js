@@ -30,7 +30,9 @@ export default class Example extends React.Component {
     this._isAlright = null;
   }
 
-
+  static navigationOptions = {
+    title: 'Trip Chat'
+  };
 
   componentWillMount() {
     this._isMounted = true;
