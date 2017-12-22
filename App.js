@@ -257,7 +257,7 @@ export default StackNavigator({
   NewPassenger: {
     screen: NewPassengerScreen,
   },
-  DriverMap: {
+  Map: {
     screen: DriverMapScreen,
   },
   PassengerMap: {
