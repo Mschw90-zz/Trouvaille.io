@@ -274,6 +274,9 @@ export default StackNavigator({
   },
   PreviousTrips: {
     screen: PreviousTripsScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
   PopularTrips: {
     screen: PopularTripsScreen,
