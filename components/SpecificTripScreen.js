@@ -56,7 +56,7 @@ export default class SpecificTripScreen extends React.Component {
         </View>
         <View style={{alignItems: 'center'}}>
           <Text>Trip Date: {driveMonth}/{driveDay}/{driveYear}</Text>
-          <Text>Seats Cost- ${this.state.trip.cost}</Text>
+          <Text>{this.state.trip.num_seats} total seats : Seats Cost- ${this.state.trip.cost}</Text>
           <Text>{this.state.trip.remaining_seats} seats left</Text>
           <View style={styles.viewRow}>
             <Icon style={styles.blueIcon} name='ios-heart' /><Text style={styles.commentOrLikeCount}>0</Text>

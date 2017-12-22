@@ -46,7 +46,7 @@ export default class Payment extends React.Component {
           <View>
         {this.state.allYourCards.map(card =>{
           return(<TouchableOpacity key={card.stripeLast4} onPress={this.viewCard.bind(this)} style={[styles.spotifyButton, styles.buttonRed]}>
-          <Text style={styles.buttonLabel}>Delete: {card.stripeLast4}</Text>
+          <Text style={styles.buttonLabel}>Delete: ************{card.stripeLast4}</Text>
         </TouchableOpacity>)
         })}
           </View>
