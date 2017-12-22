@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Image, View, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Text } from 'react-native';
-import { ImagePicker } from 'expo';
+import { ImagePicker, LinearGradient } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import styles from '../styles.js';
 import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
@@ -207,9 +207,10 @@ export default class ProfileScreen extends React.Component {
 
   render() {
     return (
+      <LinearGradient colors={['#43C6AC', '#F8FFAE']} style={{height: Dimensions.get('window').height}}>
       <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
-        {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} /> : null}
+        {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 180, height: 180, borderRadius: 25 }} /> : null}
         <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
           <TouchableOpacity onPress={this._pickImage} style={{marginRight: 10}}>
           <Image
@@ -224,21 +225,21 @@ export default class ProfileScreen extends React.Component {
           />
           </TouchableOpacity>
         </View>
-        <Label>First Name</Label>
+
         <TextInput
+            placeholder='First Name'
             value={this.state.firstName}
             style={styles.inputField2}
             onChangeText={(text) => this.setFirstName(text)}
         ></TextInput>
 
-        <Label>Last Name</Label>
         <TextInput
+            placeholder='Last Name'
             value={this.state.lastName}
             style={styles.inputField2}
             onChangeText={(text) => this.setLastName(text)}
         ></TextInput>
 
-        <Label>Birthday</Label>
         <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}>
           <TextInput
               value={this.state.month}
@@ -266,15 +267,15 @@ export default class ProfileScreen extends React.Component {
           ></TextInput>
         </View>
 
-        <Label>Hometown</Label>
         <TextInput
+            placeholder='Hometown'
             value={this.state.hometown}
             style={styles.inputField2}
             onChangeText={(text) => this.setHometown(text)}
         ></TextInput>
 
-        <Label>Bio</Label>
         <TextInput
+            placeholder='Write something about yourself'
             value={this.state.bio}
             multiline={true}
             numberOfLines={10}
@@ -288,6 +289,7 @@ export default class ProfileScreen extends React.Component {
         </TouchableOpacity>
       </KeyboardAvoidingView>
       </ScrollView>
+      </LinearGradient>
     );
   }
 

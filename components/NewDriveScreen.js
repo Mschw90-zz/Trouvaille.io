@@ -166,10 +166,11 @@ export default class NewDriveScreen extends React.Component {
   render() {
     return (
 
+      <LinearGradient colors={['#00C9FF', '#92FE9D']} style={{height: Dimensions.get('window').height}}>
       <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
+        <View style={{ flex: 1, backgroundColor: 'transparent'}}>
         <Label>Pick Date</Label>
-        <View style={{ flex: 1 }}>
           <TouchableOpacity onPress={this._showModal} style={{alignItems: 'center'}}>
             <Icon active name='ios-calendar-outline' />
           </TouchableOpacity>
@@ -229,7 +230,6 @@ export default class NewDriveScreen extends React.Component {
         ></TextInput>
 
         <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}>
-          <Label>Seats</Label>
           <TextInput
               placeholder='#Seats'
               keyboardType = 'numeric'
@@ -258,6 +258,7 @@ export default class NewDriveScreen extends React.Component {
         </TouchableOpacity>
       </KeyboardAvoidingView>
       </ScrollView>
+      </LinearGradient>
     )
   }
 }
