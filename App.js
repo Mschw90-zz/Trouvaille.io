@@ -250,9 +250,15 @@ export default StackNavigator({
   },
   Profile: {
     screen: ProfileScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
   NewDrive: {
     screen: NewDriveScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
   NewPassenger: {
     screen: NewPassengerScreen,
@@ -265,12 +271,21 @@ export default StackNavigator({
   },
   Settings: {
     screen: SettingsScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
   addCar: {
     screen: addCarScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
   SpecificTrip: {
     screen: SpecificTripScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
   PreviousTrips: {
     screen: PreviousTripsScreen,

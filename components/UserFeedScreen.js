@@ -7,6 +7,9 @@ import { Constants, Facebook } from 'expo';
 import { DOMAIN } from '../env.js';
 import Sidebar from './Sidebar.js';
 import styles from '../styles.js'
+// import SearchBar from 'react-native-search-bar'
+import { SearchBar } from 'react-native-elements'
+
 
 
 
@@ -15,9 +18,11 @@ export default class UserFeedScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: {},
+      username: '',
       userfeed: [],
       tripStuff: {},
-      background: ['#92FB7A','#3A69F6', '#EB4CC7', '#8A29F5', '#EB3323', 'aqua', 'fuchsia', 'lime', 'navy', 'olive', 'orange', 'red', 'silver', 'teal', 'yellow']
+      background: 'rgba(244, 246, 247, .9)'
     }
   }
 
@@ -41,6 +46,27 @@ export default class UserFeedScreen extends React.Component {
   }
 
   componentWillMount() {
+
+    fetch(`${DOMAIN}/profile`, {
+      method: 'GET',
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((responseJson) => {
+      if (responseJson.success) {
+        console.log(responseJson);
+        let newName = responseJson.username.toLowerCase()
+        this.setState({user: responseJson, username: newName})
+      } else {
+        console.log('There was an error finding your trip feed', responseJson.error);
+      }
+    })
+    .catch((err) => {
+      console.log('no trip feed found');
+      alert(err)
+    });
+
     fetch(`${DOMAIN}/getUserFeed`, {
       method: 'GET',
     })
@@ -49,6 +75,7 @@ export default class UserFeedScreen extends React.Component {
     })
     .then((responseJson) => {
       if (responseJson.length) {
+        responseJson.reverse()
         this.setState({userfeed: responseJson})
       } else {
         console.log('There was an error finding your trip feed', responseJson.error);
@@ -71,23 +98,28 @@ export default class UserFeedScreen extends React.Component {
 
         <Container style={{backgroundColor: '#E0E3ED'}}>
         <Image style={styles.backgroundColor} source={require('../assets/roadbro.gif')}/>
-          <Header style={{marginBottom: 10}}>
+          <Header style={{backgroundColor: 'transparent'}}>
             <Left>
               <Button transparent>
-                <Icon name='ios-person' onPress={() => {this.openDrawer()}}/>
+                <Icon name='ios-person' onPress={() => {this.openDrawer()}} style={{color: 'white'}}/>
               </Button>
             </Left>
             <Body>
-              <Title>User Feed</Title>
+              <Title style={{fontSize: 25, textAlign: 'center', fontWeight: 'bold', color: 'white', textShadowColor: "black", textShadowRadius: 5, textShadowOffset: {width: 3, height: 2}}}>{this.state.username}</Title>
             </Body>
             <Right>
               <Button transparent>
-                <Icon name='ios-car' onPress={() => {this.newTripPage()}} style={{color: 'red'}}/>
+                <Icon name='ios-car' onPress={() => {this.newTripPage()}} style={{color: 'white'}}/>
               </Button>
             </Right>
           </Header>
+          <SearchBar
+          // lightTheme
+          inputStyle={{color: 'white'}}
+          placeholder='Search'
+          />
           <Content style={{ display: 'flex', flex: 1}}>
-          {
+                      {
             this.state.userfeed.map((trip, idx) => {
               var d = new Date(trip.date)
               var driveMonth = (d.getMonth() + 1).toString();
@@ -95,7 +127,7 @@ export default class UserFeedScreen extends React.Component {
               var driveYear = (d.getFullYear()).toString();
 
               return (
-                <Row key={trip.id} id={trip.id} onPress={() => {this.specificTripPage(trip)}} style={{backgroundColor: this.state.background[idx % 15], borderRadius:10, borderColor: 'black', borderWidth: 1, marginBottom: 10, marginLeft: 5, marginRight: 5}}>
+                <Row key={trip.id} id={trip.id} onPress={() => {this.specificTripPage(trip)}} style={{backgroundColor: this.state.background, borderRadius:10, borderColor: 'black', borderWidth: 1, marginTop: 10, marginLeft: 5, marginRight: 5}}>
                   <View style={{flex: .5, alignItems: 'center', justifyContent: 'center'}}>
                   <Image style={styles.circularProfPic} source={{ uri: trip.user.profile_URL }} />
                   <Text style={{fontWeight: 'bold'}}>{trip.user.first_name}</Text>

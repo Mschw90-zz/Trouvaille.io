@@ -206,13 +206,20 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   viewRow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: 'transparent'
   },
-  blueIcon: {
-    color: 'blue'
+  heartIcon: {
+    color: 'red',
+    marginRight: 8
+  },
+  chatIcon: {
+    color: 'white',
+    marginRight: 8
   },
   commentOrLikeCount: {
-    color: 'red',
+    color: 'white',
+    fontWeight: 'bold',
     alignSelf: 'flex-end'
   },
   mapButton: {
