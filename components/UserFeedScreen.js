@@ -19,6 +19,7 @@ export default class UserFeedScreen extends React.Component {
     super(props);
     this.state = {
       user: {},
+      searchText: '',
       username: '',
       userfeed: [],
       tripStuff: {},
@@ -87,6 +88,10 @@ export default class UserFeedScreen extends React.Component {
     });
   }
 
+  searchbar(text) {
+    this.setState({searchText: text.toLowerCase()})
+  }
+
   render() {
     return (
       <Drawer
@@ -114,13 +119,16 @@ export default class UserFeedScreen extends React.Component {
             </Right>
           </Header>
           <SearchBar
-          // lightTheme
-          inputStyle={{color: 'white'}}
-          placeholder='Search'
+            // lightTheme
+            onChangeText={(text) => this.searchbar(text)}
+            inputStyle={{color: 'white'}}
+            placeholder='Search'
           />
           <Content style={{ display: 'flex', flex: 1}}>
-                      {
-            this.state.userfeed.map((trip, idx) => {
+          {
+            this.state.userfeed.filter(trip => {
+              return trip.departure_city.toLowerCase().includes(this.state.searchText) || trip.destination_state.toLowerCase().includes(this.state.searchText) || trip.departure_state.toLowerCase().includes(this.state.searchText) || trip.destination_city.toLowerCase().includes(this.state.searchText)
+            }).map((trip, idx) => {
               var d = new Date(trip.date)
               var driveMonth = (d.getMonth() + 1).toString();
               var driveDay = (d.getDate()).toString();

@@ -298,9 +298,7 @@ export default StackNavigator({
   },
   ChatBox: {
     screen: ChatScreen,
-    navigationOptions: {
-      header: null,
-    },
+    
   },
   Payment: {
     screen: PaymentScreen

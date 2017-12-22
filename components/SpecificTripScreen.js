@@ -66,16 +66,16 @@ export default class SpecificTripScreen extends React.Component {
         <View style={{ flex: 1, alignItems: 'center', marginTop: 15}}>
           <Image style={{ width: 100, height: 100, borderRadius: 25 }} source={{ uri: this.props.navigation.state.params.trip.user.profile_URL.toString()}} />
           <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'space-between', justifyContent: 'center', backgroundColor: 'transparent', marginTop: 15, marginBottom: 15}}>
-            <TouchableOpacity onPress={this.funStuff.bind(this)} style={{borderRadius: 70, justifyContent: 'center', width: Dimensions.get('window').width / 4, backgroundColor: 'blue', marginRight: 10}}>
-              <Text style={styles.buttonLabel}>Landmarks</Text>
+            <TouchableOpacity onPress={this.funStuff.bind(this)} style={{borderRadius: 70, justifyContent: 'center', width: Dimensions.get('window').width / 4, backgroundColor: 'white', marginRight: 10}}>
+              <Text style={styles.buttonLabel2}>Landmarks</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{borderRadius: 70, justifyContent: 'center',width: Dimensions.get('window').width / 4, backgroundColor: 'blue'}} onPress={() => {this.checkoutPage()}}>
-              <Text style={styles.buttonLabel}>Join Trip</Text>
+            <TouchableOpacity style={{borderRadius: 70, justifyContent: 'center',width: Dimensions.get('window').width / 4, backgroundColor: 'white'}} onPress={() => {this.checkoutPage()}}>
+              <Text style={styles.buttonLabel2}>Join Trip</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{borderRadius: 70, justifyContent: 'center', width: Dimensions.get('window').width / 4, backgroundColor: 'blue', marginLeft: 10}} onPress={() => {this.tripChatPage()}}>
-              <Text style={styles.buttonLabel}>Chat</Text>
+            <TouchableOpacity style={{borderRadius: 70, justifyContent: 'center', width: Dimensions.get('window').width / 4, backgroundColor: 'white', marginLeft: 10}} onPress={() => {this.tripChatPage()}}>
+              <Text style={styles.buttonLabel2}>Chat</Text>
             </TouchableOpacity>
           </View>
 
