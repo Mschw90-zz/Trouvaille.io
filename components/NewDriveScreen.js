@@ -180,12 +180,12 @@ export default class NewDriveScreen extends React.Component {
                 changeDay={ (day) => this.setTripDate(day) }
                 closeModal={ () => this._hideModal() }>
               </DateSelectCalendar>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 title='hide modal'
                 color='#841584'
                 onPress={this._hideModal}>
                   <Text>Hide Modal</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
           </Modal>
         </View>

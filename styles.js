@@ -232,9 +232,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   calendar: {
+    marginTop: 33,
+    marginBottom: 33,
     height: 350,
     borderWidth: 1,
-    borderColor: 'gray'
+    borderColor: 'black'
   },
   newDriveView: {
     flex:.5,
