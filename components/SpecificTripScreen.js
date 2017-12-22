@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, Dimensions, TouchableOpacity, Image} from 'react-native';
-import { Icon, Button } from 'native-base';
+import { LinearGradient } from 'expo';
+import { View, Text, Dimensions, TouchableOpacity, Image} from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import styles from '../styles.js';
+import { Header, Label, Button, Right, Left, Icon, Body, Title } from 'native-base';
+
 
 export default class SpecificTripScreen extends React.Component {
   constructor(props) {
@@ -34,6 +36,10 @@ export default class SpecificTripScreen extends React.Component {
     this.props.navigation.navigate('Fun', {trip_url: this.state.trip.fun_trip_url})
   }
 
+  goBack() {
+    this.props.navigation.navigate('UserFeed')
+  }
+
   render() {
 
     var d = new Date(this.state.trip.date)
@@ -44,34 +50,54 @@ export default class SpecificTripScreen extends React.Component {
     console.log(this.props.navigation.state.params.trip.user.profile_URL)
 
     return (
-      <View>
-        <View style={styles.centerView}>
-          <View style={{flex: .5, alignItems: 'center', justifyContent: 'center'}}>
-            <Image style={styles.circularProfPic} source={{ uri: this.props.navigation.state.params.trip.user.profile_URL.toString()}} />
+      <LinearGradient colors={['#03001e', '#7303c0', '#ec38bc']} style={{height: Dimensions.get('window').height}}>
+      <Header style={{backgroundColor: 'transparent'}}>
+        <Left>
+          <Button transparent>
+            <Icon name='ios-arrow-back' onPress={() => {this.goBack()}} style={{color: 'white'}}/>
+          </Button>
+        </Left>
+        <Body>
+          <Title style={{fontSize: 25, textAlign: 'center', color: 'white'}}>Profile</Title>
+        </Body>
+        <Right>
+        </Right>
+      </Header>
+        <View style={{ flex: 1, alignItems: 'center', marginTop: 15}}>
+          <Image style={{ width: 100, height: 100, borderRadius: 25 }} source={{ uri: this.props.navigation.state.params.trip.user.profile_URL.toString()}} />
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'space-between', justifyContent: 'center', backgroundColor: 'transparent', marginTop: 15, marginBottom: 15}}>
+            <TouchableOpacity onPress={this.funStuff.bind(this)} style={{borderRadius: 70, justifyContent: 'center', width: Dimensions.get('window').width / 4, backgroundColor: 'blue', marginRight: 10}}>
+              <Text style={styles.buttonLabel}>Landmarks</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{borderRadius: 70, justifyContent: 'center',width: Dimensions.get('window').width / 4, backgroundColor: 'blue'}} onPress={() => {this.checkoutPage()}}>
+              <Text style={styles.buttonLabel}>Join Trip</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{borderRadius: 70, justifyContent: 'center', width: Dimensions.get('window').width / 4, backgroundColor: 'blue', marginLeft: 10}} onPress={() => {this.tripChatPage()}}>
+              <Text style={styles.buttonLabel}>Chat</Text>
+            </TouchableOpacity>
           </View>
-          <Text>{this.state.user.first_name}: Trip to {this.state.trip.destination_city}, {this.state.trip.destination_state}</Text>
-          <TouchableOpacity onPress={this.funStuff.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
-          <Text style={styles.buttonLabel}>View Landmarks</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text>Trip Date: {driveMonth}/{driveDay}/{driveYear}</Text>
-          <Text>{this.state.trip.num_seats} total seats : Seats Cost- ${this.state.trip.cost}</Text>
-          <Text>{this.state.trip.remaining_seats} seats left</Text>
+
+          <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white'}}>{this.state.user.first_name}&#39;s Trip to {this.state.trip.destination_city}, {this.state.trip.destination_state}</Text>
+
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+            <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white', fontWeight: 'bold'}}>Trip Date: </Text>
+            <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white'}}>{driveMonth}/{driveDay}/{driveYear}</Text>
+          </View>
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+            <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white', fontWeight: 'bold'}}>{this.state.trip.num_seats} total seats : </Text>
+            <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white'}}>Seats Cost- ${this.state.trip.cost}</Text>
+          </View>
+          <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white'}}>{this.state.trip.remaining_seats} seats left</Text>
           <View style={styles.viewRow}>
-            <Icon style={styles.blueIcon} name='ios-heart' /><Text style={styles.commentOrLikeCount}>0</Text>
-            <Icon style={styles.blueIcon} name='ios-chatbubbles' /><Text style={styles.commentOrLikeCount}>0</Text>
+            <Icon style={styles.heartIcon} name='ios-heart' /><Text style={{color: 'white', fontWeight: 'bold', alignSelf: 'flex-end', marginRight: 10}}>0</Text>
+            <Icon style={styles.chatIcon} name='ios-chatbubbles' /><Text style={styles.commentOrLikeCount}>0</Text>
           </View>
-          <Row style={{flex: 1}}>
-          <TouchableOpacity style={styles.chatButton} onPress={() => {this.checkoutPage()}}>
-            <Text style={styles.buttonLabel}>Join this trip!</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.chatButton} onPress={() => {this.tripChatPage()}}>
-            <Text style={styles.buttonLabel}>View Chat</Text>
-          </TouchableOpacity>
-          </Row>
-        </View>
-      </View>
+          <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white', fontWeight: 'bold', marginTop: 20}}>Trip Description:</Text>
+          <Text style={{backgroundColor: 'transparent', fontSize: 25, color: 'white'}}>{this.state.trip.trip_details}</Text>
+          </View>
+      </LinearGradient>
     )
   }
 }

@@ -208,6 +208,18 @@ export default class ProfileScreen extends React.Component {
   render() {
     return (
       <LinearGradient colors={['#43C6AC', '#F8FFAE']} style={{height: Dimensions.get('window').height}}>
+      <Header style={{backgroundColor: 'transparent'}}>
+        <Left>
+          <Button transparent>
+            <Icon name='ios-arrow-back' onPress={() => {this.goBack()}} style={{color: 'white'}}/>
+          </Button>
+        </Left>
+        <Body>
+          <Title style={{fontSize: 25, textAlign: 'center', color: 'white'}}>Profile</Title>
+        </Body>
+        <Right>
+        </Right>
+      </Header>
       <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
         {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 180, height: 180, borderRadius: 25 }} /> : null}

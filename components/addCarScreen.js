@@ -4,7 +4,7 @@ import { ImagePicker, LinearGradient } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import styles from '../styles.js';
 import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
-import { Label } from 'native-base';
+import { Header, Label, Button, Right, Left, Icon, Body, Title } from 'native-base';
 
 
 export default class ProfileScreen extends React.Component {
@@ -206,9 +206,25 @@ export default class ProfileScreen extends React.Component {
    });
  }
 
+ goBack() {
+   this.props.navigation.navigate('Profile')
+ }
+
   render() {
     return (
       <LinearGradient colors={['#ef32d9', '#89fffd']} style={{height: Dimensions.get('window').height}}>
+      <Header style={{backgroundColor: 'transparent'}}>
+        <Left>
+          <Button transparent>
+            <Icon name='ios-arrow-back' onPress={() => {this.goBack()}} style={{color: 'white'}}/>
+          </Button>
+        </Left>
+        <Body>
+          <Title style={{fontSize: 25, textAlign: 'center', color: 'white'}}>Add Car</Title>
+        </Body>
+        <Right>
+        </Right>
+      </Header>
       <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
         {this.state.image ? <Image source={{ uri: this.state.image }} style={{ width: 180, height: 180, borderRadius: 25 }} /> : null}

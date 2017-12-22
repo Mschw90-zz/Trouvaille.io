@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Image, View, TouchableOpacity, Text } from 'react-native';
+import { Dimensions, Button, Image, View, TouchableOpacity, Text } from 'react-native';
 import { ImagePicker, Facebook, LinearGradient } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import { DOMAIN } from '../env.js';
@@ -88,7 +88,10 @@ export default class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <LinearGradient colors={['#833ab4', '#fd1d1d', '#fcb045']} style={{flex: 1, justifyContent: "center", alignItems: 'center'}}>
+      <LinearGradient colors={['#833ab4', '#fd1d1d', '#fcb045']} style={{flex: 1, justifyContent: "center", alignItems: 'center', height: Dimensions.get('window').height}}>
+        <View>
+          <Text style={{fontSize: 50, textAlign: 'center', color: 'white',backgroundColor: 'transparent'}}>Settings</Text>
+        </View>
         <TouchableOpacity onPress={this.connectFacebook.bind(this)} style={[styles.spotifyButton, styles.buttonBlue]}>
           <Image
           style={{width:30, height: 30, marginRight: 15}}

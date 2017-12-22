@@ -1,12 +1,13 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View, TouchableOpacity, Alert, AsyncStorage, ScrollView, KeyboardAvoidingView, TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import {Container, Header, Label, Button, Icon, Content, Item, Form, Input } from 'native-base';
+import {Container, Header, Label, Button, Right, Content, Item, Form, Input, Left, Icon, Body, Title } from 'native-base';
 import DateSelectCalendar from './DateSelectCalendar.js';
 import Modal from 'react-native-modal';
 import styles from '../styles.js';
 import { DOMAIN, ACCESSKEY, SECRETKEY } from '../env.js';
 import { LinearGradient } from 'expo';
+
 
 export default class NewDriveScreen extends React.Component {
   constructor(props){
@@ -157,7 +158,9 @@ export default class NewDriveScreen extends React.Component {
     });
   }
 
-
+  goBack() {
+    this.props.navigation.navigate('UserFeed')
+  }
 
   DriverDestinationMap() {
     this.props.navigation.navigate('DriverMap');
@@ -167,12 +170,24 @@ export default class NewDriveScreen extends React.Component {
     return (
 
       <LinearGradient colors={['#00C9FF', '#92FE9D']} style={{height: Dimensions.get('window').height}}>
+      <Header style={{backgroundColor: 'transparent'}}>
+        <Left>
+          <Button transparent>
+            <Icon name='ios-arrow-back' onPress={() => {this.goBack()}} style={{color: 'white'}}/>
+          </Button>
+        </Left>
+        <Body>
+          <Title style={{fontSize: 25, textAlign: 'center', color: 'white'}}>New Trip</Title>
+        </Body>
+        <Right>
+        </Right>
+      </Header>
       <ScrollView>
       <KeyboardAvoidingView behavior='padding' style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', paddingBottom: 40, paddingTop: 20}}>
         <View style={{ flex: 1, backgroundColor: 'transparent'}}>
-        <Label>Pick Date</Label>
+        <Label style={{color: 'white'}}>Pick Date</Label>
           <TouchableOpacity onPress={this._showModal} style={{alignItems: 'center'}}>
-            <Icon active name='ios-calendar-outline' />
+            <Icon active name='ios-calendar-outline' style={{color: 'white'}} />
           </TouchableOpacity>
           <Modal style={styles.calendarModal} isVisible={this.state.isModalVisible}>
             <View style={styles.calendarView}>
