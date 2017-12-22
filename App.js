@@ -31,7 +31,7 @@ import {
 } from 'react-native-global-props';
 import styles from './styles.js'
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const customTextInputProps = {
   underlineColorAndroid: 'rgba(0,0,0,0)',

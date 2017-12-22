@@ -22,7 +22,7 @@ export default class UserFeedScreen extends React.Component {
   }
 
   newTripPage() {
-    this.props.navigation.navigate('NewTrip')
+    this.props.navigation.navigate('NewDrive')
   }
 
   specificTripPage(tripInfo) {
@@ -70,6 +70,7 @@ export default class UserFeedScreen extends React.Component {
       >
 
         <Container style={{backgroundColor: '#E0E3ED'}}>
+        <Image style={styles.backgroundColor} source={require('../assets/roadbro.gif')}/>
           <Header style={{marginBottom: 10}}>
             <Left>
               <Button transparent>

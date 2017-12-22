@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Dimensions, TouchableOpacity} from 'react-native';
 import { Icon, Button } from 'native-base';
 import styles from '../styles.js';
+
 export default class SpecificTripScreen extends React.Component {
   constructor(props) {
     super(props)

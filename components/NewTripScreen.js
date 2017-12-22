@@ -30,19 +30,16 @@ export default class NewTripScreen extends React.Component {
     render() {
       return (
         <LinearGradient colors={['#00C9FF', '#92FE9D']} style={styles.background}>
-            <View style={styles.newDriveView}>
+          <View style={styles.newDriveView}>
             <Text style={styles.newTripText}>
-              Would you like to be a Driver or Passenger?
+               Are You Ready to Plan a Trip?
             </Text>
-            </View>
-            <View style={styles.newTripViewTwo}>
-              <Button onPress={() => {this.newDrivePage()}} style={styles.newDriveButton}>
-                <Icon name='ios-car' style={styles.newDriveIcon} />
-              </Button>
-              <Button transparent onPress={() => {this.newPassengerPage()}} style={styles.newPassengerButton}>
-                <Icon name='ios-briefcase' style={styles.newPassengerIcon}/>
-              </Button>
-            </View>
+          </View>
+          <View style={styles.newTripViewTwo}>
+            <Button onPress={() => {this.newDrivePage()}} style={styles.newDriveButton}>
+              <Icon name='ios-car' style={styles.newDriveIcon} />
+            </Button>
+          </View>
         </LinearGradient>
       )
     }
