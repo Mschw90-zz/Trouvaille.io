@@ -2,7 +2,7 @@
 - [Introduction](https://github.com/Mschw90/Trouvaille.io#introduction)
 - [About Our Application](https://github.com/Mschw90/Trouvaille.io#about-our-application)
 - [Where to Find Our Code](https://github.com/Mschw90/Trouvaille.io#where-to-find-our-code)
-- [Framework](https://github.com/Mschw90/Trouvaille.io#framework)
+- [Framework/Architecture](https://github.com/Mschw90/Trouvaille.io#framework)
 - [Implementation Tools](https://github.com/Mschw90/Trouvaille.io#implementation-tools)
 
 ## Introduction
@@ -22,10 +22,10 @@ The code within this repository contains the source code for our React Native ve
 | Back End | https://github.com/TScafeJR/Ride-Server |
 
 
-## Framework
+## Framework/Architecture
 ![drawing3](https://user-images.githubusercontent.com/30609097/34425078-c35435be-ebdd-11e7-912e-6a8b551ed9fb.png)
 
-This above image should give you concise idea of our RESTful architecture. However, I would recommend you read the rest of our framework to understand the logic behind some of our design choices.
+The above image should give you a concise idea of our RESTful architecture.
 
 In order to ultimately scale our application as both a mobile application and a website, we decided as a team to create a centralized server that manages requests to and from our users. In order to acheive this setup, we bundled the [website and server together in a seperate repository](https://github.com/TScafeJR/Ride-Server) and put the React Native code within this repository. To reduce labor, it makes sense to have both of these versions make requests to the same server rather than writing a different server for both applications. This strategy also allows us to access and edit the same databases. This should help limit the complexity of our application, however this project required some creative work arounds to keep this structure viable as we scaled up.
 
