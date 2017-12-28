@@ -2,7 +2,7 @@
 - [Introduction](https://github.com/Mschw90/Trouvaille.io#introduction)
 - [About Our Application](https://github.com/Mschw90/Trouvaille.io#about-our-application)
 - [Where to Find Our Code](https://github.com/Mschw90/Trouvaille.io#where-to-find-our-code)
-- [Framework/Architecture](https://github.com/Mschw90/Trouvaille.io#framework)
+- [Framework/Architecture](https://github.com/Mschw90/Trouvaille.io#frameworkarchitecture)
 - [Implementation Tools](https://github.com/Mschw90/Trouvaille.io#implementation-tools)
 
 ## Introduction
